@@ -1,4 +1,8 @@
-﻿using System.Web;
+﻿using BundleTransformer.Core.Builders;
+using BundleTransformer.Core.Bundles;
+using BundleTransformer.Core.Orderers;
+using BundleTransformer.Core.Resolvers;
+using System.Web;
 using System.Web.Optimization;
 
 namespace project3
@@ -8,23 +12,29 @@ namespace project3
         // For more information on bundling, visit https://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
-            bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
-                        "~/Scripts/jquery.validate*"));
+            bundles.Add(new ScriptBundle("~/Bundles/Scripts/main").Include(
+                      "~/Scripts/main.js"));
+            bundles.Add(new ScriptBundle("~/Bundles/Scripts/home").Include(
+                      "~/Scripts/home.js"));
+            bundles.Add(new StyleBundle("~/icon/css").Include(
+                      "~/fontawesome/css/all.min.css"
+                      ));
+            bundles.Add(new CustomStyleBundle("~/Bundle/sass").Include(
+                      "~/css/reset.scss"));
+            bundles.Add(new CustomStyleBundle("~/Bundle/home").Include(
+                      "~/css/home.scss"));
+            bundles.Add(new CustomStyleBundle("~/Bundle/main").Include(
+                      "~/css/main.scss"));
+            //var nullBulider = new NullBuilder();
+            //var nullOrderer = new NullOrderer();
 
-            // Use the development version of Modernizr to develop with and learn from. Then, when you're
-            // ready for production, use the build tool at https://modernizr.com to pick only the tests you need.
-            bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
-                        "~/Scripts/modernizr-*"));
+            //BundleResolver.Current = new CustomBundleResolver();
+            //var commonStyleBundle = new CustomStyleBundle("~/Bundle/sass");
 
-            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js"));
-
-            bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+            //commonStyleBundle.Include("~/css/reset.scss");
+            //commonStyleBundle.Orderer = nullOrderer;
+            //bundles.Add(commonStyleBundle);
         }
     }
 }

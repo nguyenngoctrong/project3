@@ -1,0 +1,298 @@
+﻿@import '_variable.scss';
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: $px10 0;
+    background-color: $color-white;
+    width: 100%;
+    z-index:100;
+
+    .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__brand {
+        height: 47px;
+        width: 100px;
+
+        a {
+            display: block;
+            height: 100%;
+        }
+
+        img {
+            object-fit: scale-down;
+            &:nth-child(2){
+                display:none;
+            }
+        }
+    }
+
+    &__toggle {
+        font-size: 2rem;
+        cursor: pointer;
+        position: relative;
+        height: 20px;
+        width: 20px;
+
+        i {
+            position: absolute;
+            top: 0;
+            left: 0;
+
+            &:nth-child(1) {
+                visibility: visible;
+                transition-delay: .35s;
+            }
+
+            &:nth-child(2) {
+                visibility: hidden;
+                transform: rotate(0);
+                transition: all .35s ease;
+            }
+        }
+    }
+
+    &__toggle.active {
+        i {
+            &:nth-child(1) {
+                visibility: hidden;
+                transition-delay:0s;
+            }
+
+            &:nth-child(2) {
+                visibility: visible;
+                transition-delay: 0;
+                transform: rotate(90deg);
+            }
+        }
+    }
+    &__action{
+        display:none;
+    }
+}
+.nav {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    background-color: white;
+    width: 200px;
+    height: 100%;
+    transition: all .5s ease;
+    transform: translateX(-100%);
+    overflow-y: auto;
+
+    li {
+        cursor: pointer;
+    }
+
+    &__box {
+        height: 100%;
+        padding: 10px;
+    }
+
+    &__item {
+        a {
+            color: $color-dark;
+            font-size: 1.2rem;
+        }
+
+        &-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid $color-border1;
+            padding: 10px 3px;
+
+            i {
+                transform: rotate(0);
+                transition: all .35s ease;
+            }
+
+            & > a {
+                text-transform: uppercase;
+                font-weight: bold;
+                letter-spacing: 1.5px;
+            }
+        }
+
+        &-box.active {
+            i {
+                transform: rotate(90deg);
+            }
+
+            & + .nav__item-children {
+                height: 150px;
+            }
+        }
+
+        &-children {
+            padding-left: 20px;
+            height: 0px;
+            overflow: hidden;
+            transition: all .35s ease;
+
+            a {
+                font-size: 1.5rem;
+                font-weight: 200;
+                text-transform: capitalize;
+            }
+
+            li {
+                padding: 10px 0;
+                border-bottom: 1px solid $color-border1;
+            }
+        }
+    }
+}
+.nav.active{
+    transform:translateX(0);
+}
+
+@media all and (min-width:$breakpoint-lg){
+    .header {
+        padding-top:20px;
+        background-color: initial;
+        .container{
+            justify-content:initial;
+        }
+
+        &__brand {
+            width:215px;
+            height: 56px;
+            img {
+                &:nth-child(1) {
+                    display: none;
+                }
+
+                &:nth-child(2) {
+                    display: block;
+                }
+            }
+        }
+        &__toggle{
+            display:none;
+        }
+        &__action{
+            display:flex;
+            align-items:center;
+            button{
+                white-space:nowrap;
+                padding:5px 10px;
+                border: .5px solid $color-white;
+                color:white;
+                background-color:initial;
+                text-transform:uppercase;
+                margin-right :20px;
+                letter-spacing: .5px;
+                transition: all .3s linear;
+                &:hover{
+                    background-color:$color-white;
+                    color:$color-dark;
+                }
+            }
+            i{
+                color:white;
+                font-size:2rem;
+                position:relative;
+                span{
+                    position:absolute;
+                    right:-41%;
+                    top:-35%;
+                    width:18px;
+                    height:18px;
+                    font-size:.8rem;
+                    box-sizing:border-box;
+                    text-align:center;
+                    background-color:$color-pink1;
+                    color:$color-black;
+                    display:flex;
+                    align-items:center;
+                    justify-content:center;
+                    border-radius:50%;
+                }
+            }
+
+        }
+    }
+    .nav {
+        position: initial;
+        top: initial;
+        left: initial;
+        color: white;
+        transform: initial;
+        background-color: initial;
+        width: 100%;
+        margin-left: 100px;
+        overflow: initial;
+
+
+        &__box {
+            display: flex;
+            align-items: center;
+            overflow: visible;
+            width: auto;
+            justify-content: space-around;
+        }
+
+        &__item {
+            position: relative;
+            height: 40px;
+            display: flex;
+            align-items: center;
+
+            &-box {
+                border: initial;
+                display: initial;
+                justify-content: initial;
+                padding: initial;
+
+                & > i {
+                    display: none;
+                }
+
+                &:hover + .nav__item-children {
+                    visibility: visible;
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            &-children {
+                height: auto;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                background-color: $color-white;
+                padding: 10px;
+                width: 120px;
+                visibility: hidden;
+                opacity: 0;
+                transform: translateY(-10px);
+                transition: all .5s ease;
+
+                & > li {
+                    border: initial;
+
+                    a {
+                        color: $color-gray;
+                        white-space: nowrap;
+                    }
+                }
+
+                &:hover {
+                    visibility: visible;
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        }
+
+        a, i {
+            color: white;
+        }
+    }
+}
