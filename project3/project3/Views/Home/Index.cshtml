@@ -1,4 +1,4 @@
-﻿
+﻿@model List<Models.FrameWork.Bouquest>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -12,7 +12,7 @@
     <section class="slide" id="slideContent">
         <div class="container">
             <div class="slide__content">
-                <div class="slide__item ">
+                <div class="slide__item active ">
                     <p class="slide__item-title active">
                         Welcome to Rosebud
                     </p>
@@ -80,6 +80,67 @@
                 <input type="radio" name="slide" id="slide3" />
                 <label for="slide3">
                 </label>
+            </div>
+        </div>
+    </section>
+    <section class="introduce">
+        <div class="container">
+            <div class="introduce__list">
+                <div class="introduce__item">
+                    <img src="~/img/icon1.png" alt="" />
+                    <h5 class="introduce__item-name">
+                        Ready To Be Impressed
+                    </h5>
+                    <p class="introduce__item-sub">
+                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatem assumenda quaerat vel ducimus aspernatur non facere architecto distinctio minus numquam, ad praesentium, totam ratione incidunt reiciendis deserunt quis, voluptas dolorem.
+                    </p>
+                </div>
+                <div class="introduce__item">
+                    <img src="~/img/icon2.png" alt="" />
+                    <h5 class="introduce__item-name">
+                        Ready To Be Impressed
+                    </h5>
+                    <p class="introduce__item-sub">
+                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatem assumenda quaerat vel ducimus aspernatur non facere architecto distinctio minus numquam, ad praesentium, totam ratione incidunt reiciendis deserunt quis, voluptas dolorem.
+                    </p>
+                </div>
+                <div class="introduce__item">
+                    <img src="~/img/icon3.png" alt="" />
+                    <h5 class="introduce__item-name">
+                        Ready To Be Impressed
+                    </h5>
+                    <p class="introduce__item-sub">
+                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatem assumenda quaerat vel ducimus aspernatur non facere architecto distinctio minus numquam, ad praesentium, totam ratione incidunt reiciendis deserunt quis, voluptas dolorem.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="product">
+        <div class="container">
+            <div class="product__title">
+                <h3 class="product__title-name">
+                    Wonderful gift
+                </h3>
+                <h2 class="product__title-sub">
+                    Our wonderful arrangements
+                </h2>
+            </div>
+            <div class="product__list">
+                @foreach (var item in Model)
+                {
+                    <div class="product__item">
+                        <div class="product__item-img">
+                            <img src=@item.Image alt="" />
+                            <a href="#"> Add to cart</a>
+                            <span></span>
+                        </div>
+                        <h3 class="product__item-name">
+                            @item.Name
+                        </h3>
+                        <h5 class="product__item-sub">@item.Price D</h5>
+                    </div>
+                }
             </div>
         </div>
     </section>
