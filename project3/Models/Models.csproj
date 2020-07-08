@@ -34,17 +34,69 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BCrypt.Net-Next, Version=4.0.0.0, Culture=neutral, PublicKeyToken=1e11be04b6288443, processorArchitecture=MSIL">
+      <HintPath>..\packages\BCrypt.Net-Next.4.0.0\lib\net472\BCrypt.Net-Next.dll</HintPath>
+    </Reference>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.6.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <HintPath>..\packages\BouncyCastle.1.8.6.1\lib\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="CryptoHelper, Version=3.0.2.0, Culture=neutral, PublicKeyToken=646ad3faa20406ba, processorArchitecture=MSIL">
+      <HintPath>..\packages\CryptoHelper.3.0.2\lib\netstandard2.0\CryptoHelper.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNetCore.Cryptography.Internal, Version=2.0.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Cryptography.Internal.2.0.1\lib\netstandard2.0\Microsoft.AspNetCore.Cryptography.Internal.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Cryptography.KeyDerivation, Version=2.0.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Cryptography.KeyDerivation.2.0.1\lib\netstandard2.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Scrypt, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Scrypt.NET.1.3.0\lib\net20\Scrypt.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -53,23 +105,109 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FrameWork\Bill.cs">
+      <DependentUpon>JavaFloristDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FrameWork\Bouquest.cs">
+      <DependentUpon>JavaFloristDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FrameWork\Cart.cs">
+      <DependentUpon>JavaFloristDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FrameWork\CartDetail.cs">
+      <DependentUpon>JavaFloristDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FrameWork\Credit.cs">
+      <DependentUpon>JavaFloristDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FrameWork\Customer.cs">
+      <DependentUpon>JavaFloristDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FrameWork\Gender.cs">
+      <DependentUpon>JavaFloristDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FrameWork\JavaFloristDbContext.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>JavaFloristDbContext.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FrameWork\JavaFloristDbContext.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>JavaFloristDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FrameWork\JavaFloristDbContext.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>JavaFloristDbContext.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="FrameWork\Message.cs">
+      <DependentUpon>JavaFloristDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FrameWork\ProBill_ReadAllBillByBouquest_Result.cs">
+      <DependentUpon>JavaFloristDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FrameWork\ProBill_ReadAllBillByCustomer_Result.cs">
+      <DependentUpon>JavaFloristDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FrameWork\ProCartDetails_Create_Result.cs">
+      <DependentUpon>JavaFloristDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FrameWork\ProCartDetails_Read_Result.cs">
+      <DependentUpon>JavaFloristDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FrameWork\ProCheck_U_Result.cs">
+      <DependentUpon>JavaFloristDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FrameWork\ProCus_ReadMulti_Result.cs">
+      <DependentUpon>JavaFloristDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FrameWork\ProCus_ReadOne_Result.cs">
+      <DependentUpon>JavaFloristDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FrameWork\ProLogin_Result.cs">
+      <DependentUpon>JavaFloristDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FrameWork\ProMes_Read_Result.cs">
+      <DependentUpon>JavaFloristDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FrameWork\Role.cs">
+      <DependentUpon>JavaFloristDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FrameWork\sysdiagram.cs">
+      <DependentUpon>JavaFloristDbContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="ProductModel.cs" />
-    <Compile Include="FrameWork\Bill.cs" />
-    <Compile Include="FrameWork\Bouquest.cs" />
-    <Compile Include="FrameWork\Cart.cs" />
-    <Compile Include="FrameWork\CartDetail.cs" />
-    <Compile Include="FrameWork\Credit.cs" />
-    <Compile Include="FrameWork\Customer.cs" />
-    <Compile Include="FrameWork\FloristDbContext.cs" />
-    <Compile Include="FrameWork\Message.cs" />
-    <Compile Include="FrameWork\Role.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\Encrypt.cs" />
+    <Compile Include="Service\Hashing.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <EntityDeploy Include="FrameWork\JavaFloristDbContext.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>JavaFloristDbContext.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="FrameWork\JavaFloristDbContext.edmx.diagram">
+      <DependentUpon>JavaFloristDbContext.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="FrameWork\JavaFloristDbContext.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>JavaFloristDbContext.edmx</DependentUpon>
+      <LastGenOutput>JavaFloristDbContext.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="FrameWork\JavaFloristDbContext.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>JavaFloristDbContext.edmx</DependentUpon>
+      <LastGenOutput>JavaFloristDbContext.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

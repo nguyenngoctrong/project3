@@ -6,8 +6,8 @@
                 <img src="@Url.Content("~/img/logo-header.png")" alt="logo" />
             </a>
         </div>
-        <nav class="nav">
-            <ul class="nav__box">
+        <nav class="nav mb-0">
+            <ul class="nav__box mb-0">
                 <li class="nav__item">
                     <div class="nav__item-box">
                         <a href="/">
@@ -160,22 +160,74 @@
                 </li>
             </ul>
         </nav>
-        <div class="header__toggle" id="toggleMenu">
-            <i class="fas fa-bars"></i>
-            <i class="fas fa-times"></i>
+        <div class="header__box">
+            @if (User.Identity.IsAuthenticated)
+            {
+            <div class="header__action -user">
+                <p class=" mb-0 header__user">
+                    @HttpContext.Current.User.Identity.Name
+                </p>
+
+                <div class="cart__sub">
+                    <div class="cart__sub-cart">
+                        <i class="fas fa-shopping-cart">
+                            <span>
+                                0
+                            </span>
+                        </i>
+                    </div>
+                    <div class="cart__bag">
+                        <p class="cart__bag-title">Bag</p>
+                        <div class="cart__list">
+                            <div class="cart__item">
+                                <div class="cart__item-img"><img src="~/img/product1.jpg" alt="" /></div>
+                                <p>Rose</p>
+                                <div class="cart__item-info">
+                                    <p class="cart__item-price">
+                                        <i class="fas fa-dollar-sign"></i><span>2000</span><span>00</span>
+                                    </p>
+                                    <button>Delete</button>
+                                </div>
+                            </div>
+                            <div class="cart__item">
+                                <div class="cart__item-img"><img src="~/img/product1.jpg" alt="" /></div>
+                                <p>Rose</p>
+                                <div class="cart__item-info">
+                                    <p class="cart__item-price">
+                                        <i class="fas fa-dollar-sign"></i><span>2000</span><span>00</span>
+                                    </p>
+                                    <button>Delete</button>
+                                </div>
+                            </div>
+                        </div><a class="cart__bag-btn" href="#">View Bag</a>
+                    </div>
+                </div>
+                <a href="@Url.Action("Logout","Home")">
+                    Logout
+                </a>
+            </div>
+
+
+            }
+            else
+            {
+                <div class="header__action">
+                    <a href="/Home/Login" >
+                        Sign In
+                    </a>
+                    <a>
+                        Sign Up
+                    </a>
+                </div>
+
+            }
+            <div class="header__toggle" id="toggleMenu">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-times"></i>
+            </div>
         </div>
-        <div class="header__action">
-            <button>
-                Sign In
-            </button>
-            <button>
-                Sign Up
-            </button>
-            <i class="fas fa-shopping-cart">
-                <span>
-                    0
-                </span>
-            </i>
-        </div>
+        
+       
+
     </div>
 </header>

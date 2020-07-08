@@ -1,0 +1,74 @@
+﻿@model project3.Models.Register
+
+@{
+    ViewBag.Title = "SignUp";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section AddCss{
+    @Styles.Render("~/Bundle/home")
+}
+
+<section class="login">
+    <div class="container" id="divEmp">
+        @using (Html.BeginForm("SignUp", "Home", FormMethod.Post, new { @id = "registerFormId", @class = "form-horizontal", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            HtmlHelper.UnobtrusiveJavaScriptEnabled = false;
+
+            <div class="form-horizontal">
+                <h4>Register</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control  w-50" } })
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control  w-50" } })
+                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ConfirmPassword, htmlAttributes: new { @class = "control-label col-md-2 " })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control  w-50" } })
+                        @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Id_Role, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.Id_Role, (List<SelectListItem>)ViewBag.Role_id, new { @class = "form-control  w-50" })
+                        @Html.ValidationMessageFor(model => model.Id_Role, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Login" class="btn btn-primary" />
+                        @Html.ActionLink("Back to List", "Index", "Home", new { @class = " btn btn-dark" })
+                    </div>
+                </div>
+            </div>
+        }
+
+
+    </div>
+</section>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script>
+    document.querySelector(".header").classList.add("active");
+</script>

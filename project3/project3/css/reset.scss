@@ -1,5 +1,5 @@
 ﻿@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap");
-@import '_variable.scss';
+@import '~/css/_variable.scss';
 *, *::after, *::before{
     padding:0;
     margin:0;
@@ -15,7 +15,7 @@ img{
     object-fit:cover;
 }
 a{
-    text-decoration:none;
+    text-decoration:none !important;
 }
 a,button{
     cursor:pointer;
@@ -31,11 +31,26 @@ input, button {
 ul{
     list-style:none;
 }
-.container{
-    padding:0 30px;
+.container {
+    padding: 0 30px !important;
 }
 @media all and  (min-width:$breakpoint-xl){
     .container{
-        padding: 0 140px;
+        padding: 0 140px  !important;
+    }
+}
+@media (min-width: 576) {
+    .container {
+        max-width: initial !important;
+    }
+}
+@media (min-width: 768px) {
+    .container {
+        max-width: initial !important;
+    }
+}
+@media (min-width: 992px){
+    .container{
+        max-width:initial !important;
     }
 }

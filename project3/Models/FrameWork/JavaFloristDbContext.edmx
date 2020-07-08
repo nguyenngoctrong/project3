@@ -1,0 +1,1125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="JavaFloristModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Bill">
+          <Key>
+            <PropertyRef Name="Id_Bill" />
+          </Key>
+          <Property Name="Id_Bill" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_Bou" Type="int" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Image" Type="varchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" />
+          <Property Name="Price" Type="decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Id_Cus" Type="int" />
+          <Property Name="Volume" Type="int" />
+          <Property Name="Order_Date" Type="datetime" />
+          <Property Name="Delivery_Date" Type="datetime" />
+          <Property Name="Cus_Note" Type="nvarchar" MaxLength="100" />
+          <Property Name="Bill_Status" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Bouquest">
+          <Key>
+            <PropertyRef Name="Id_Bou" />
+          </Key>
+          <Property Name="Id_Bou" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Image" Type="varchar" MaxLength="50" />
+          <Property Name="Description" Type="varchar" MaxLength="2000" />
+          <Property Name="Price" Type="decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Status" Type="varchar" MaxLength="20" />
+          <Property Name="Id_Cus" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cart">
+          <Key>
+            <PropertyRef Name="Id_Cart" />
+          </Key>
+          <Property Name="Id_Cart" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_Cus" Type="int" />
+          <Property Name="Cart_Total" Type="decimal" Precision="19" Scale="4" />
+        </EntityType>
+        <EntityType Name="CartDetails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_Cart" Type="int" />
+          <Property Name="Id_Bou" Type="int" />
+          <Property Name="Volume" Type="int" />
+          <Property Name="Total_Price" Type="decimal" Precision="19" Scale="4" />
+        </EntityType>
+        <EntityType Name="Credit">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_Bill" Type="int" />
+          <Property Name="Credit_Card" Type="varchar" MaxLength="15" />
+          <Property Name="Code" Type="varchar" MaxLength="8" />
+          <Property Name="Price" Type="decimal" Precision="19" Scale="4" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Id_Cus" />
+          </Key>
+          <Property Name="Id_Cus" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="Password" Type="varchar" MaxLength="250" />
+          <Property Name="FirstName" Type="varchar" MaxLength="10" />
+          <Property Name="LastName" Type="varchar" MaxLength="10" />
+          <Property Name="Image" Type="varchar" MaxLength="50" />
+          <Property Name="Birth" Type="date" />
+          <Property Name="Phone" Type="varchar" MaxLength="15" />
+          <Property Name="Address" Type="varchar" MaxLength="100" />
+          <Property Name="Id_Role" Type="int" />
+          <Property Name="Id_Gender" Type="int" />
+        </EntityType>
+        <EntityType Name="Gender">
+          <Key>
+            <PropertyRef Name="Id_Gender" />
+          </Key>
+          <Property Name="Id_Gender" Type="int" Nullable="false" />
+          <Property Name="Gender_Define" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Message">
+          <Key>
+            <PropertyRef Name="Id_Mess" />
+          </Key>
+          <Property Name="Id_Mess" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_Bill" Type="int" Nullable="false" />
+          <Property Name="Sender" Type="varchar" MaxLength="20" />
+          <Property Name="Message" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id_Role" />
+          </Key>
+          <Property Name="Id_Role" Type="int" Nullable="false" />
+          <Property Name="Role_Define" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_BillCus">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Bill" Type="Self.Bill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id_Cus" />
+            </Principal>
+            <Dependent Role="Bill">
+              <PropertyRef Name="Id_Cus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BouCus">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Bouquest" Type="Self.Bouquest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id_Cus" />
+            </Principal>
+            <Dependent Role="Bouquest">
+              <PropertyRef Name="Id_Cus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CaDeBou">
+          <End Role="Bouquest" Type="Self.Bouquest" Multiplicity="0..1" />
+          <End Role="CartDetails" Type="Self.CartDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bouquest">
+              <PropertyRef Name="Id_Bou" />
+            </Principal>
+            <Dependent Role="CartDetails">
+              <PropertyRef Name="Id_Bou" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CaDeCart">
+          <End Role="Cart" Type="Self.Cart" Multiplicity="0..1" />
+          <End Role="CartDetails" Type="Self.CartDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cart">
+              <PropertyRef Name="Id_Cart" />
+            </Principal>
+            <Dependent Role="CartDetails">
+              <PropertyRef Name="Id_Cart" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CreBill">
+          <End Role="Bill" Type="Self.Bill" Multiplicity="0..1" />
+          <End Role="Credit" Type="Self.Credit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bill">
+              <PropertyRef Name="Id_Bill" />
+            </Principal>
+            <Dependent Role="Credit">
+              <PropertyRef Name="Id_Bill" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CusGen">
+          <End Role="Gender" Type="Self.Gender" Multiplicity="0..1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gender">
+              <PropertyRef Name="Id_Gender" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="Id_Gender" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CusRole">
+          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id_Role" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="Id_Role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MesBill">
+          <End Role="Bill" Type="Self.Bill" Multiplicity="1" />
+          <End Role="Message" Type="Self.Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bill">
+              <PropertyRef Name="Id_Bill" />
+            </Principal>
+            <Dependent Role="Message">
+              <PropertyRef Name="Id_Bill" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="ProBill_Create" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_Bill" Type="int" Mode="In" />
+          <Parameter Name="id_Bou" Type="int" Mode="In" />
+          <Parameter Name="name" Type="varchar" Mode="In" />
+          <Parameter Name="image" Type="varchar" Mode="In" />
+          <Parameter Name="Description" Type="nvarchar" Mode="In" />
+          <Parameter Name="price" Type="decimal" Mode="In" />
+          <Parameter Name="id_Cus" Type="int" Mode="In" />
+          <Parameter Name="volume" Type="int" Mode="In" />
+          <Parameter Name="order_Date" Type="datetime" Mode="In" />
+          <Parameter Name="delivery_Date" Type="datetime" Mode="In" />
+          <Parameter Name="cus_Note" Type="nvarchar" Mode="In" />
+          <Parameter Name="bill_status" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="ProBill_ReadAllBillByBouquest" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_Bou" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ProBill_ReadAllBillByCustomer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_Cus" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ProBill_UpStt_Canceled" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_Bill" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ProBill_UpStt_Delivering" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_Bill" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ProBill_UpStt_Done" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_Bill" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ProBill_UpStt_Loading" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_Bill" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ProBill_UpStt_Other" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_Bill" Type="int" Mode="In" />
+          <Parameter Name="status" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="ProCart_CreateGetId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_Cus" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ProCart_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_Cart" Type="int" Mode="In" />
+          <Parameter Name="total" Type="decimal" Mode="In" />
+        </Function>
+        <Function Name="ProCartDetails_Create" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_Cart" Type="int" Mode="In" />
+          <Parameter Name="id_Bou" Type="int" Mode="In" />
+          <Parameter Name="Volume" Type="int" Mode="In" />
+          <Parameter Name="total_price" Type="decimal" Mode="In" />
+        </Function>
+        <Function Name="ProCartDetails_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ProCartDetails_Read" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="id_Cart" Type="int" Mode="In" />
+          <Parameter Name="id_Bou" Type="int" Mode="In" />
+          <Parameter Name="Volume" Type="int" Mode="In" />
+          <Parameter Name="total_price" Type="decimal" Mode="In" />
+          <Parameter Name="statement" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="ProCartDetails_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="Volume" Type="int" Mode="In" />
+          <Parameter Name="total_price" Type="decimal" Mode="In" />
+        </Function>
+        <Function Name="ProCheck_U" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="email" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="ProCus_Create" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="email" Type="varchar" Mode="In" />
+          <Parameter Name="password" Type="varchar" Mode="In" />
+          <Parameter Name="firstName" Type="varchar" Mode="In" />
+          <Parameter Name="lastName" Type="varchar" Mode="In" />
+          <Parameter Name="image" Type="varchar" Mode="In" />
+          <Parameter Name="birth" Type="date" Mode="In" />
+          <Parameter Name="id_Gender" Type="int" Mode="In" />
+          <Parameter Name="phone" Type="varchar" Mode="In" />
+          <Parameter Name="address" Type="varchar" Mode="In" />
+          <Parameter Name="id_Role" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ProCus_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ProCus_ReadMulti" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="ProCus_ReadOne" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ProCus_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="email" Type="varchar" Mode="In" />
+          <Parameter Name="password" Type="varchar" Mode="In" />
+          <Parameter Name="firstName" Type="varchar" Mode="In" />
+          <Parameter Name="lastName" Type="varchar" Mode="In" />
+          <Parameter Name="image" Type="varchar" Mode="In" />
+          <Parameter Name="birth" Type="date" Mode="In" />
+          <Parameter Name="id_Gender" Type="int" Mode="In" />
+          <Parameter Name="phone" Type="varchar" Mode="In" />
+          <Parameter Name="address" Type="varchar" Mode="In" />
+          <Parameter Name="id_Role" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ProLogin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="email" Type="varchar" Mode="In" />
+          <Parameter Name="password" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="ProMes_Create" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_Bill" Type="int" Mode="In" />
+          <Parameter Name="sender" Type="varchar" Mode="In" />
+          <Parameter Name="mes" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="ProMes_Read" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_Bill" Type="int" Mode="In" />
+          <Parameter Name="sender" Type="varchar" Mode="In" />
+          <Parameter Name="mes" Type="nvarchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="JavaFloristModelStoreContainer">
+          <EntitySet Name="Bill" EntityType="Self.Bill" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Bouquest" EntityType="Self.Bouquest" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cart" EntityType="Self.Cart" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CartDetails" EntityType="Self.CartDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Credit" EntityType="Self.Credit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Gender" EntityType="Self.Gender" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Message" EntityType="Self.Message" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_BillCus" Association="Self.FK_BillCus">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Bill" EntitySet="Bill" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BouCus" Association="Self.FK_BouCus">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Bouquest" EntitySet="Bouquest" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CaDeBou" Association="Self.FK_CaDeBou">
+            <End Role="Bouquest" EntitySet="Bouquest" />
+            <End Role="CartDetails" EntitySet="CartDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CaDeCart" Association="Self.FK_CaDeCart">
+            <End Role="Cart" EntitySet="Cart" />
+            <End Role="CartDetails" EntitySet="CartDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CreBill" Association="Self.FK_CreBill">
+            <End Role="Bill" EntitySet="Bill" />
+            <End Role="Credit" EntitySet="Credit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CusGen" Association="Self.FK_CusGen">
+            <End Role="Gender" EntitySet="Gender" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CusRole" Association="Self.FK_CusRole">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MesBill" Association="Self.FK_MesBill">
+            <End Role="Bill" EntitySet="Bill" />
+            <End Role="Message" EntitySet="Message" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="JavaFloristModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Bill">
+          <Key>
+            <PropertyRef Name="Id_Bill" />
+          </Key>
+          <Property Name="Id_Bill" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_Bou" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Image" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Id_Cus" Type="Int32" />
+          <Property Name="Volume" Type="Int32" />
+          <Property Name="Order_Date" Type="DateTime" Precision="3" />
+          <Property Name="Delivery_Date" Type="DateTime" Precision="3" />
+          <Property Name="Cus_Note" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Bill_Status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_BillCus" FromRole="Bill" ToRole="Customer" />
+          <NavigationProperty Name="Credits" Relationship="Self.FK_CreBill" FromRole="Bill" ToRole="Credit" />
+          <NavigationProperty Name="Messages" Relationship="Self.FK_MesBill" FromRole="Bill" ToRole="Message" />
+        </EntityType>
+        <EntityType Name="Bouquest">
+          <Key>
+            <PropertyRef Name="Id_Bou" />
+          </Key>
+          <Property Name="Id_Bou" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Image" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Id_Cus" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_BouCus" FromRole="Bouquest" ToRole="Customer" />
+          <NavigationProperty Name="CartDetails" Relationship="Self.FK_CaDeBou" FromRole="Bouquest" ToRole="CartDetails" />
+        </EntityType>
+        <EntityType Name="Cart">
+          <Key>
+            <PropertyRef Name="Id_Cart" />
+          </Key>
+          <Property Name="Id_Cart" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_Cus" Type="Int32" />
+          <Property Name="Cart_Total" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="CartDetails" Relationship="Self.FK_CaDeCart" FromRole="Cart" ToRole="CartDetails" />
+        </EntityType>
+        <EntityType Name="CartDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_Cart" Type="Int32" />
+          <Property Name="Id_Bou" Type="Int32" />
+          <Property Name="Volume" Type="Int32" />
+          <Property Name="Total_Price" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="Bouquest" Relationship="Self.FK_CaDeBou" FromRole="CartDetails" ToRole="Bouquest" />
+          <NavigationProperty Name="Cart" Relationship="Self.FK_CaDeCart" FromRole="CartDetails" ToRole="Cart" />
+        </EntityType>
+        <EntityType Name="Credit">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_Bill" Type="Int32" />
+          <Property Name="Credit_Card" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Code" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="Bill" Relationship="Self.FK_CreBill" FromRole="Credit" ToRole="Bill" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Id_Cus" />
+          </Key>
+          <Property Name="Id_Cus" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="FirstName" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Image" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Birth" Type="DateTime" Precision="0" />
+          <Property Name="Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Id_Role" Type="Int32" />
+          <Property Name="Id_Gender" Type="Int32" />
+          <NavigationProperty Name="Bills" Relationship="Self.FK_BillCus" FromRole="Customer" ToRole="Bill" />
+          <NavigationProperty Name="Bouquests" Relationship="Self.FK_BouCus" FromRole="Customer" ToRole="Bouquest" />
+          <NavigationProperty Name="Gender" Relationship="Self.FK_CusGen" FromRole="Customer" ToRole="Gender" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_CusRole" FromRole="Customer" ToRole="Role" />
+        </EntityType>
+        <EntityType Name="Gender">
+          <Key>
+            <PropertyRef Name="Id_Gender" />
+          </Key>
+          <Property Name="Id_Gender" Type="Int32" Nullable="false" />
+          <Property Name="Gender_Define" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Customers" Relationship="Self.FK_CusGen" FromRole="Gender" ToRole="Customer" />
+        </EntityType>
+        <EntityType Name="Message">
+          <Key>
+            <PropertyRef Name="Id_Mess" />
+          </Key>
+          <Property Name="Id_Mess" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_Bill" Type="Int32" Nullable="false" />
+          <Property Name="Sender" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Message1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Bill" Relationship="Self.FK_MesBill" FromRole="Message" ToRole="Bill" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id_Role" />
+          </Key>
+          <Property Name="Id_Role" Type="Int32" Nullable="false" />
+          <Property Name="Role_Define" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Customers" Relationship="Self.FK_CusRole" FromRole="Role" ToRole="Customer" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_BillCus">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Bill" Type="Self.Bill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id_Cus" />
+            </Principal>
+            <Dependent Role="Bill">
+              <PropertyRef Name="Id_Cus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CreBill">
+          <End Role="Bill" Type="Self.Bill" Multiplicity="0..1" />
+          <End Role="Credit" Type="Self.Credit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bill">
+              <PropertyRef Name="Id_Bill" />
+            </Principal>
+            <Dependent Role="Credit">
+              <PropertyRef Name="Id_Bill" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MesBill">
+          <End Role="Bill" Type="Self.Bill" Multiplicity="1" />
+          <End Role="Message" Type="Self.Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bill">
+              <PropertyRef Name="Id_Bill" />
+            </Principal>
+            <Dependent Role="Message">
+              <PropertyRef Name="Id_Bill" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BouCus">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Bouquest" Type="Self.Bouquest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id_Cus" />
+            </Principal>
+            <Dependent Role="Bouquest">
+              <PropertyRef Name="Id_Cus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CaDeBou">
+          <End Role="Bouquest" Type="Self.Bouquest" Multiplicity="0..1" />
+          <End Role="CartDetails" Type="Self.CartDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bouquest">
+              <PropertyRef Name="Id_Bou" />
+            </Principal>
+            <Dependent Role="CartDetails">
+              <PropertyRef Name="Id_Bou" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CaDeCart">
+          <End Role="Cart" Type="Self.Cart" Multiplicity="0..1" />
+          <End Role="CartDetails" Type="Self.CartDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cart">
+              <PropertyRef Name="Id_Cart" />
+            </Principal>
+            <Dependent Role="CartDetails">
+              <PropertyRef Name="Id_Cart" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CusGen">
+          <End Role="Gender" Type="Self.Gender" Multiplicity="0..1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gender">
+              <PropertyRef Name="Id_Gender" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="Id_Gender" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CusRole">
+          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id_Role" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="Id_Role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="JavaFloristEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Bills" EntityType="Self.Bill" />
+          <EntitySet Name="Bouquests" EntityType="Self.Bouquest" />
+          <EntitySet Name="Carts" EntityType="Self.Cart" />
+          <EntitySet Name="CartDetails" EntityType="Self.CartDetail" />
+          <EntitySet Name="Credits" EntityType="Self.Credit" />
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="Genders" EntityType="Self.Gender" />
+          <EntitySet Name="Messages" EntityType="Self.Message" />
+          <EntitySet Name="Roles" EntityType="Self.Role" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <AssociationSet Name="FK_BillCus" Association="Self.FK_BillCus">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Bill" EntitySet="Bills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CreBill" Association="Self.FK_CreBill">
+            <End Role="Bill" EntitySet="Bills" />
+            <End Role="Credit" EntitySet="Credits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MesBill" Association="Self.FK_MesBill">
+            <End Role="Bill" EntitySet="Bills" />
+            <End Role="Message" EntitySet="Messages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BouCus" Association="Self.FK_BouCus">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Bouquest" EntitySet="Bouquests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CaDeBou" Association="Self.FK_CaDeBou">
+            <End Role="Bouquest" EntitySet="Bouquests" />
+            <End Role="CartDetails" EntitySet="CartDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CaDeCart" Association="Self.FK_CaDeCart">
+            <End Role="Cart" EntitySet="Carts" />
+            <End Role="CartDetails" EntitySet="CartDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CusGen" Association="Self.FK_CusGen">
+            <End Role="Gender" EntitySet="Genders" />
+            <End Role="Customer" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CusRole" Association="Self.FK_CusRole">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="Customer" EntitySet="Customers" />
+          </AssociationSet>
+          <FunctionImport Name="ProBill_Create">
+            <Parameter Name="id_Bill" Mode="In" Type="Int32" />
+            <Parameter Name="id_Bou" Mode="In" Type="Int32" />
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="image" Mode="In" Type="String" />
+            <Parameter Name="Description" Mode="In" Type="String" />
+            <Parameter Name="price" Mode="In" Type="Decimal" />
+            <Parameter Name="id_Cus" Mode="In" Type="Int32" />
+            <Parameter Name="volume" Mode="In" Type="Int32" />
+            <Parameter Name="order_Date" Mode="In" Type="DateTime" />
+            <Parameter Name="delivery_Date" Mode="In" Type="DateTime" />
+            <Parameter Name="cus_Note" Mode="In" Type="String" />
+            <Parameter Name="bill_status" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ProBill_ReadAllBillByBouquest" ReturnType="Collection(JavaFloristModel.ProBill_ReadAllBillByBouquest_Result)">
+            <Parameter Name="id_Bou" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ProBill_ReadAllBillByCustomer" ReturnType="Collection(JavaFloristModel.ProBill_ReadAllBillByCustomer_Result)">
+            <Parameter Name="id_Cus" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ProBill_UpStt_Canceled">
+            <Parameter Name="id_Bill" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ProBill_UpStt_Delivering">
+            <Parameter Name="id_Bill" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ProBill_UpStt_Done">
+            <Parameter Name="id_Bill" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ProBill_UpStt_Loading">
+            <Parameter Name="id_Bill" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ProBill_UpStt_Other">
+            <Parameter Name="id_Bill" Mode="In" Type="Int32" />
+            <Parameter Name="status" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ProCart_CreateGetId" ReturnType="Collection(Int32)">
+            <Parameter Name="id_Cus" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ProCart_Update">
+            <Parameter Name="id_Cart" Mode="In" Type="Int32" />
+            <Parameter Name="total" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="ProCartDetails_Create" ReturnType="Collection(JavaFloristModel.ProCartDetails_Create_Result)">
+            <Parameter Name="id_Cart" Mode="In" Type="Int32" />
+            <Parameter Name="id_Bou" Mode="In" Type="Int32" />
+            <Parameter Name="Volume" Mode="In" Type="Int32" />
+            <Parameter Name="total_price" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="ProCartDetails_Delete">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ProCartDetails_Read" ReturnType="Collection(JavaFloristModel.ProCartDetails_Read_Result)">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="id_Cart" Mode="In" Type="Int32" />
+            <Parameter Name="id_Bou" Mode="In" Type="Int32" />
+            <Parameter Name="Volume" Mode="In" Type="Int32" />
+            <Parameter Name="total_price" Mode="In" Type="Decimal" />
+            <Parameter Name="statement" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ProCartDetails_Update">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="Volume" Mode="In" Type="Int32" />
+            <Parameter Name="total_price" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="ProCheck_U" ReturnType="Collection(JavaFloristModel.ProCheck_U_Result)">
+            <Parameter Name="email" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ProCus_Create" ReturnType="Collection(Decimal)">
+            <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
+            <Parameter Name="firstName" Mode="In" Type="String" />
+            <Parameter Name="lastName" Mode="In" Type="String" />
+            <Parameter Name="image" Mode="In" Type="String" />
+            <Parameter Name="birth" Mode="In" Type="DateTime" />
+            <Parameter Name="id_Gender" Mode="In" Type="Int32" />
+            <Parameter Name="phone" Mode="In" Type="String" />
+            <Parameter Name="address" Mode="In" Type="String" />
+            <Parameter Name="id_Role" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ProCus_Delete">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ProCus_ReadMulti" ReturnType="Collection(JavaFloristModel.ProCus_ReadMulti_Result)" />
+          <FunctionImport Name="ProCus_ReadOne" ReturnType="Collection(JavaFloristModel.ProCus_ReadOne_Result)">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ProCus_Update">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
+            <Parameter Name="firstName" Mode="In" Type="String" />
+            <Parameter Name="lastName" Mode="In" Type="String" />
+            <Parameter Name="image" Mode="In" Type="String" />
+            <Parameter Name="birth" Mode="In" Type="DateTime" />
+            <Parameter Name="id_Gender" Mode="In" Type="Int32" />
+            <Parameter Name="phone" Mode="In" Type="String" />
+            <Parameter Name="address" Mode="In" Type="String" />
+            <Parameter Name="id_Role" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ProLogin" ReturnType="Collection(JavaFloristModel.ProLogin_Result)">
+            <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ProMes_Create">
+            <Parameter Name="id_Bill" Mode="In" Type="Int32" />
+            <Parameter Name="sender" Mode="In" Type="String" />
+            <Parameter Name="mes" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ProMes_Read" ReturnType="Collection(JavaFloristModel.ProMes_Read_Result)">
+            <Parameter Name="id_Bill" Mode="In" Type="Int32" />
+            <Parameter Name="sender" Mode="In" Type="String" />
+            <Parameter Name="mes" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="ProBill_ReadAllBillByBouquest_Result">
+          <Property Type="Int32" Name="Id_Bill" Nullable="false" />
+          <Property Type="Int32" Name="Id_Bou" Nullable="true" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Image" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="100" />
+          <Property Type="Decimal" Name="Price" Nullable="false" Precision="19" Scale="4" />
+          <Property Type="Int32" Name="Id_Cus" Nullable="true" />
+          <Property Type="Int32" Name="Volume" Nullable="true" />
+          <Property Type="DateTime" Name="Order_Date" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="Delivery_Date" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Cus_Note" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Bill_Status" Nullable="true" MaxLength="20" />
+        </ComplexType>
+        <ComplexType Name="ProBill_ReadAllBillByCustomer_Result">
+          <Property Type="Int32" Name="Id_Bill" Nullable="false" />
+          <Property Type="Int32" Name="Id_Bou" Nullable="true" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Image" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="100" />
+          <Property Type="Decimal" Name="Price" Nullable="false" Precision="19" Scale="4" />
+          <Property Type="Int32" Name="Id_Cus" Nullable="true" />
+          <Property Type="Int32" Name="Volume" Nullable="true" />
+          <Property Type="DateTime" Name="Order_Date" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="Delivery_Date" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Cus_Note" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Bill_Status" Nullable="true" MaxLength="20" />
+        </ComplexType>
+        <ComplexType Name="ProCartDetails_Create_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Int32" Name="Id_Cart" Nullable="true" />
+          <Property Type="Int32" Name="Id_Bou" Nullable="true" />
+          <Property Type="Int32" Name="Volume" Nullable="true" />
+          <Property Type="Decimal" Name="Total_Price" Nullable="true" Precision="19" Scale="4" />
+        </ComplexType>
+        <ComplexType Name="ProCartDetails_Read_Result">
+          <Property Type="Int32" Name="Id_Bou" Nullable="true" />
+          <Property Type="Int32" Name="Volume" Nullable="true" />
+          <Property Type="Decimal" Name="Total_Price" Nullable="true" Precision="19" Scale="4" />
+        </ComplexType>
+        <ComplexType Name="ProCheck_U_Result">
+          <Property Type="Int32" Name="Id_Cus" Nullable="false" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Password" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="FirstName" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="LastName" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Image" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="Birth" Nullable="true" />
+          <Property Type="String" Name="Phone" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="Address" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="Id_Role" Nullable="true" />
+          <Property Type="Int32" Name="Id_Gender" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="ProCus_ReadMulti_Result">
+          <Property Type="Int32" Name="Id_Cus" Nullable="false" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Password" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="FirstName" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="LastName" Nullable="true" MaxLength="10" />
+          <Property Type="DateTime" Name="Birth" Nullable="true" />
+          <Property Type="String" Name="Image" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Id_Gender" Nullable="true" />
+          <Property Type="String" Name="Phone" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="Address" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="Id_Role" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="ProCus_ReadOne_Result">
+          <Property Type="Int32" Name="Id_Cus" Nullable="false" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Password" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="FirstName" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="LastName" Nullable="true" MaxLength="10" />
+          <Property Type="DateTime" Name="Birth" Nullable="true" />
+          <Property Type="String" Name="Image" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Id_Gender" Nullable="true" />
+          <Property Type="String" Name="Phone" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="Address" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="Id_Role" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="ProLogin_Result">
+          <Property Type="Int32" Name="Id_Cus" Nullable="false" />
+          <Property Type="String" Name="FirstName" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="LastName" Nullable="true" MaxLength="10" />
+          <Property Type="Int32" Name="Id_Role" Nullable="true" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="ProMes_Read_Result">
+          <Property Type="String" Name="Sender" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Message" Nullable="true" MaxLength="100" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="JavaFloristModelStoreContainer" CdmEntityContainer="JavaFloristEntities">
+          <EntitySetMapping Name="Bills">
+            <EntityTypeMapping TypeName="JavaFloristModel.Bill">
+              <MappingFragment StoreEntitySet="Bill">
+                <ScalarProperty Name="Id_Bill" ColumnName="Id_Bill" />
+                <ScalarProperty Name="Id_Bou" ColumnName="Id_Bou" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Id_Cus" ColumnName="Id_Cus" />
+                <ScalarProperty Name="Volume" ColumnName="Volume" />
+                <ScalarProperty Name="Order_Date" ColumnName="Order_Date" />
+                <ScalarProperty Name="Delivery_Date" ColumnName="Delivery_Date" />
+                <ScalarProperty Name="Cus_Note" ColumnName="Cus_Note" />
+                <ScalarProperty Name="Bill_Status" ColumnName="Bill_Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Bouquests">
+            <EntityTypeMapping TypeName="JavaFloristModel.Bouquest">
+              <MappingFragment StoreEntitySet="Bouquest">
+                <ScalarProperty Name="Id_Bou" ColumnName="Id_Bou" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Id_Cus" ColumnName="Id_Cus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Carts">
+            <EntityTypeMapping TypeName="JavaFloristModel.Cart">
+              <MappingFragment StoreEntitySet="Cart">
+                <ScalarProperty Name="Id_Cart" ColumnName="Id_Cart" />
+                <ScalarProperty Name="Id_Cus" ColumnName="Id_Cus" />
+                <ScalarProperty Name="Cart_Total" ColumnName="Cart_Total" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CartDetails">
+            <EntityTypeMapping TypeName="JavaFloristModel.CartDetail">
+              <MappingFragment StoreEntitySet="CartDetails">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Id_Cart" ColumnName="Id_Cart" />
+                <ScalarProperty Name="Id_Bou" ColumnName="Id_Bou" />
+                <ScalarProperty Name="Volume" ColumnName="Volume" />
+                <ScalarProperty Name="Total_Price" ColumnName="Total_Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Credits">
+            <EntityTypeMapping TypeName="JavaFloristModel.Credit">
+              <MappingFragment StoreEntitySet="Credit">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Id_Bill" ColumnName="Id_Bill" />
+                <ScalarProperty Name="Credit_Card" ColumnName="Credit_Card" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="JavaFloristModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="Id_Cus" ColumnName="Id_Cus" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Birth" ColumnName="Birth" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Id_Role" ColumnName="Id_Role" />
+                <ScalarProperty Name="Id_Gender" ColumnName="Id_Gender" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Genders">
+            <EntityTypeMapping TypeName="JavaFloristModel.Gender">
+              <MappingFragment StoreEntitySet="Gender">
+                <ScalarProperty Name="Id_Gender" ColumnName="Id_Gender" />
+                <ScalarProperty Name="Gender_Define" ColumnName="Gender_Define" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Messages">
+            <EntityTypeMapping TypeName="JavaFloristModel.Message">
+              <MappingFragment StoreEntitySet="Message">
+                <ScalarProperty Name="Id_Mess" ColumnName="Id_Mess" />
+                <ScalarProperty Name="Id_Bill" ColumnName="Id_Bill" />
+                <ScalarProperty Name="Sender" ColumnName="Sender" />
+                <ScalarProperty Name="Message1" ColumnName="Message" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="JavaFloristModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="Id_Role" ColumnName="Id_Role" />
+                <ScalarProperty Name="Role_Define" ColumnName="Role_Define" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="JavaFloristModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="ProBill_Create" FunctionName="JavaFloristModel.Store.ProBill_Create" />
+          <FunctionImportMapping FunctionImportName="ProBill_ReadAllBillByBouquest" FunctionName="JavaFloristModel.Store.ProBill_ReadAllBillByBouquest">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="JavaFloristModel.ProBill_ReadAllBillByBouquest_Result">
+                <ScalarProperty Name="Id_Bill" ColumnName="Id_Bill" />
+                <ScalarProperty Name="Id_Bou" ColumnName="Id_Bou" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Id_Cus" ColumnName="Id_Cus" />
+                <ScalarProperty Name="Volume" ColumnName="Volume" />
+                <ScalarProperty Name="Order_Date" ColumnName="Order_Date" />
+                <ScalarProperty Name="Delivery_Date" ColumnName="Delivery_Date" />
+                <ScalarProperty Name="Cus_Note" ColumnName="Cus_Note" />
+                <ScalarProperty Name="Bill_Status" ColumnName="Bill_Status" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ProBill_ReadAllBillByCustomer" FunctionName="JavaFloristModel.Store.ProBill_ReadAllBillByCustomer">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="JavaFloristModel.ProBill_ReadAllBillByCustomer_Result">
+                <ScalarProperty Name="Id_Bill" ColumnName="Id_Bill" />
+                <ScalarProperty Name="Id_Bou" ColumnName="Id_Bou" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Id_Cus" ColumnName="Id_Cus" />
+                <ScalarProperty Name="Volume" ColumnName="Volume" />
+                <ScalarProperty Name="Order_Date" ColumnName="Order_Date" />
+                <ScalarProperty Name="Delivery_Date" ColumnName="Delivery_Date" />
+                <ScalarProperty Name="Cus_Note" ColumnName="Cus_Note" />
+                <ScalarProperty Name="Bill_Status" ColumnName="Bill_Status" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ProBill_UpStt_Canceled" FunctionName="JavaFloristModel.Store.ProBill_UpStt_Canceled" />
+          <FunctionImportMapping FunctionImportName="ProBill_UpStt_Delivering" FunctionName="JavaFloristModel.Store.ProBill_UpStt_Delivering" />
+          <FunctionImportMapping FunctionImportName="ProBill_UpStt_Done" FunctionName="JavaFloristModel.Store.ProBill_UpStt_Done" />
+          <FunctionImportMapping FunctionImportName="ProBill_UpStt_Loading" FunctionName="JavaFloristModel.Store.ProBill_UpStt_Loading" />
+          <FunctionImportMapping FunctionImportName="ProBill_UpStt_Other" FunctionName="JavaFloristModel.Store.ProBill_UpStt_Other" />
+          <FunctionImportMapping FunctionImportName="ProCart_CreateGetId" FunctionName="JavaFloristModel.Store.ProCart_CreateGetId" />
+          <FunctionImportMapping FunctionImportName="ProCart_Update" FunctionName="JavaFloristModel.Store.ProCart_Update" />
+          <FunctionImportMapping FunctionImportName="ProCartDetails_Create" FunctionName="JavaFloristModel.Store.ProCartDetails_Create">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="JavaFloristModel.ProCartDetails_Create_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Id_Cart" ColumnName="Id_Cart" />
+                <ScalarProperty Name="Id_Bou" ColumnName="Id_Bou" />
+                <ScalarProperty Name="Volume" ColumnName="Volume" />
+                <ScalarProperty Name="Total_Price" ColumnName="Total_Price" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ProCartDetails_Delete" FunctionName="JavaFloristModel.Store.ProCartDetails_Delete" />
+          <FunctionImportMapping FunctionImportName="ProCartDetails_Read" FunctionName="JavaFloristModel.Store.ProCartDetails_Read">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="JavaFloristModel.ProCartDetails_Read_Result">
+                <ScalarProperty Name="Id_Bou" ColumnName="Id_Bou" />
+                <ScalarProperty Name="Volume" ColumnName="Volume" />
+                <ScalarProperty Name="Total_Price" ColumnName="Total_Price" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ProCartDetails_Update" FunctionName="JavaFloristModel.Store.ProCartDetails_Update" />
+          <FunctionImportMapping FunctionImportName="ProCheck_U" FunctionName="JavaFloristModel.Store.ProCheck_U">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="JavaFloristModel.ProCheck_U_Result">
+                <ScalarProperty Name="Id_Cus" ColumnName="Id_Cus" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Birth" ColumnName="Birth" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Id_Role" ColumnName="Id_Role" />
+                <ScalarProperty Name="Id_Gender" ColumnName="Id_Gender" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ProCus_Create" FunctionName="JavaFloristModel.Store.ProCus_Create" />
+          <FunctionImportMapping FunctionImportName="ProCus_Delete" FunctionName="JavaFloristModel.Store.ProCus_Delete" />
+          <FunctionImportMapping FunctionImportName="ProCus_ReadMulti" FunctionName="JavaFloristModel.Store.ProCus_ReadMulti">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="JavaFloristModel.ProCus_ReadMulti_Result">
+                <ScalarProperty Name="Id_Cus" ColumnName="Id_Cus" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Birth" ColumnName="Birth" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Id_Gender" ColumnName="Id_Gender" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Id_Role" ColumnName="Id_Role" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ProCus_ReadOne" FunctionName="JavaFloristModel.Store.ProCus_ReadOne">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="JavaFloristModel.ProCus_ReadOne_Result">
+                <ScalarProperty Name="Id_Cus" ColumnName="Id_Cus" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Birth" ColumnName="Birth" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Id_Gender" ColumnName="Id_Gender" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Id_Role" ColumnName="Id_Role" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ProCus_Update" FunctionName="JavaFloristModel.Store.ProCus_Update" />
+          <FunctionImportMapping FunctionImportName="ProLogin" FunctionName="JavaFloristModel.Store.ProLogin">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="JavaFloristModel.ProLogin_Result">
+                <ScalarProperty Name="Id_Cus" ColumnName="Id_Cus" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Id_Role" ColumnName="Id_Role" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ProMes_Create" FunctionName="JavaFloristModel.Store.ProMes_Create" />
+          <FunctionImportMapping FunctionImportName="ProMes_Read" FunctionName="JavaFloristModel.Store.ProMes_Read">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="JavaFloristModel.ProMes_Read_Result">
+                <ScalarProperty Name="Sender" ColumnName="Sender" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
