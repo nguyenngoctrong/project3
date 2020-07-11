@@ -239,7 +239,7 @@ namespace Models.FrameWork
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ProCartDetails_Read_Result>("ProCartDetails_Read", idParameter, id_CartParameter, id_BouParameter, volumeParameter, total_priceParameter, statementParameter);
         }
     
-        public virtual int ProCartDetails_Update(Nullable<int> id, Nullable<int> volume, Nullable<decimal> total_price)
+        public virtual ObjectResult<ProCartDetails_Update_Result> ProCartDetails_Update(Nullable<int> id, Nullable<int> volume, Nullable<decimal> total_price)
         {
             var idParameter = id.HasValue ?
                 new ObjectParameter("id", id) :
@@ -253,7 +253,7 @@ namespace Models.FrameWork
                 new ObjectParameter("total_price", total_price) :
                 new ObjectParameter("total_price", typeof(decimal));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ProCartDetails_Update", idParameter, volumeParameter, total_priceParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ProCartDetails_Update_Result>("ProCartDetails_Update", idParameter, volumeParameter, total_priceParameter);
         }
     
         public virtual ObjectResult<ProCheck_U_Result> ProCheck_U(string email)

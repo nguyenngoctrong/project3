@@ -25,6 +25,7 @@ namespace project3
             bundles.Add(new StyleBundle("~/bootstrap/css").Include(
                       "~/Content/bootstrap.min.css"
                       ));
+
             bundles.Add(new ScriptBundle("~/bootstrap/js").Include(
                       "~/Scripts/bootstrap.min.js",
                       "~/Scripts/respond.js"
@@ -40,6 +41,8 @@ namespace project3
                       "~/Scripts/page/home.js"));
             bundles.Add(new ScriptBundle("~/Bundles/Scripts/product").Include(
                       "~/Scripts/page/product.js"));
+            bundles.Add(new ScriptBundle("~/Bundles/Scripts/profile").Include(
+                      "~/Scripts/page/profile.js"));
 
 
 
@@ -51,6 +54,8 @@ namespace project3
                       "~/css/main.scss"));
             bundles.Add(new CustomStyleBundle("~/Bundle/product").Include(
                       "~/css/product.scss"));
+            bundles.Add(new CustomStyleBundle("~/Bundle/profile").Include(
+                      "~/css/profile.scss"));
         }
     }
 }

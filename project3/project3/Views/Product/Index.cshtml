@@ -12,59 +12,59 @@
 @section scripts{
     @Scripts.Render("~/Bundles/Scripts/product")
 }
-        <section class="product">
-            <div class="container">
-                <div class="title">
-                    <h3 class="title-name">
-                        Welcome
+<section class="product">
+    <div class="container">
+        <div class="title">
+            <h3 class="title-name">
+                Welcome
+            </h3>
+            <h2 class="title-sub">
+                List Product
+            </h2>
+        </div>
+        <div class="product__box">
+            <div class="product__action">
+                @Html.TextBox("actionSearch", null, new { @class = "product__action-search", placeholder = "Search..." })
+                <div class="product__action-group">
+                    <h3 class="product__action-title">
+                        Status
                     </h3>
-                    <h2 class="title-sub">
-                        List Product
-                    </h2>
+                    <select id="actionChangeStatus">
+                        <option value="">
+                            ALL
+                        </option>
+                        <option value="AVAILABLE" selected="selected">
+                            AVAILABLE
+                        </option>
+                        <option value="SOLDOUT">
+                            SOLDOUT
+                        </option>
+                    </select>
                 </div>
-                <div class="product__box">
-                    <div class="product__action">
-                        @Html.TextBox("actionSearch", null, new { @class = "product__action-search", placeholder = "Search..." })
-                        <div class="product__action-group">
-                            <h3 class="product__action-title">
-                                Status
-                            </h3>
-                            <select id="actionChangeStatus"   >
-                                <option value="">
-                                    ALL
-                                </option>
-                                <option value="AVAILABLE" selected="selected">
-                                    AVAILABLE
-                                </option>
-                                <option value="SOLDOUT" >
-                                    SOLDOUT
-                                </option>
-                            </select>
-                        </div>
 
-                    </div>
-                    <div class="product__list" id="productList">
-                        @foreach (var item in Model)
-                        {
-                            <div class="product__item">
-                                <div class="product__item-img">
-                                    <img src=@item.Image alt="" />
-                                    <a href="#"> Add to cart</a>
-                                    <span> @item.Status </span>
-                                </div>
-                                <a href=@("/Product/Detail/"+item.Id_Bou) class="product__item-name">
-                                    @item.Name
-                                </a>
-                                <h5 class="product__item-sub">@item.Price D</h5>
-                            </div>
-                        }
-                    </div>
-                </div>
-                @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page,status =ViewBag.Status }))
             </div>
+            <div class="product__list" id="productList">
+                @foreach (var item in Model)
+                {
+                    <div class="product__item">
+                        <div class="product__item-img">
+                            <img src=@item.Image alt="" />
+                            <a href="#"> Add to cart</a>
+                            <span> @item.Status </span>
+                        </div>
+                        <a href=@("/Product/Detail/"+item.Id_Bou) class="product__item-name">
+                            @item.Name
+                        </a>
+                        <h5 class="product__item-sub">@item.Price D</h5>
+                    </div>
+                }
+            </div>
+        </div>
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page, status = ViewBag.Status }))
+    </div>
 
-        </section>
-        <script>
+</section>
+<script>
             var setData
             const loadData = async (query) => {
                 const result = await axios(`/Product/getSearchData?query=${query}`,{
@@ -94,16 +94,12 @@
                 setData = setTimeout(function () {
                     console.log(e.target.value.length)
                     loadData(e.target.value);
-
                 }, 500);
-                
+
             })
             document.getElementById("actionChangeStatus").addEventListener("change", function (e) {
                 window.location.href = `/Product?page=1&status=${e.target.value}`;
             })
             var cc = "@ViewBag.Status";
             document.getElementById("actionChangeStatus").value=cc
-
-
-
-        </script>
+</script>

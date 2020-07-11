@@ -121,12 +121,68 @@ namespace Models
             return result;
         }
 
-        public dynamic AddToCart(int id_cart, int id_bou, int amount)
+        public object AddToCart(int idCus, int id_bou, int amount)
         {
+            var id_cart = db.Carts.Where(x => x.Id_Cus == idCus).FirstOrDefault().Id_Cart;
             var cartDetail = db.CartDetails.Where(x => x.Id_Cart == id_cart && x.Id_Bou == id_bou).FirstOrDefault();
             var bou = db.Bouquests.Where(x => x.Id_Bou == id_bou).FirstOrDefault();
-            var result = db.ProCartDetails_Create(id_cart, id_bou, amount, (bou.Price * amount)).FirstOrDefault();
-            return result;
+            if (cartDetail != null)
+            {
+                var resultUpdate = db.ProCartDetails_Update(cartDetail.Id, (amount + cartDetail.Volume), ((amount + cartDetail.Volume) * bou.Price)).FirstOrDefault();
+                return new
+                {
+                    Name =bou.Name,
+                    Decription=bou.Description,
+                    Img=bou.Image,
+                    Price=bou.Price,
+                    Id_Bou=bou.Id_Bou,
+                    Id_Cus=bou.Id_Cus,
+                    Id_Status=bou.Status,
+                    cartDetail = resultUpdate,
+
+                };
+                
+            }
+            var resultInsert = db.ProCartDetails_Create(id_cart, id_bou, amount, (bou.Price * amount)).FirstOrDefault();
+
+
+            return new
+            {
+                Name = bou.Name,
+                Decription = bou.Description,
+                Img = bou.Image,
+                Price = bou.Price,
+                Id_Bou = bou.Id_Bou,
+                Id_Cus = bou.Id_Cus,
+                Id_Status = bou.Status,
+                cartDetail = resultInsert,
+
+            };
+
+
+        }
+        public object getInforCart(int? idCus)
+        {
+            if (idCus != null)
+            {
+                var idCart = db.Carts.Where(x => x.Id_Cus == idCus).FirstOrDefault().Id_Cart;
+
+                var result = db.CartDetails.Where(x => x.Id_Cart == idCart).Join(db.Bouquests,
+                    cartDetail => cartDetail.Id_Bou,
+                    bouquest => bouquest.Id_Bou,
+                    (cartDetail, bouquest) => new {id=cartDetail.Id, id_cart = cartDetail.Id_Cart, Name = bouquest.Name, Img = bouquest.Image, Price = bouquest.Price, TotalPrice = cartDetail.Total_Price, amount = cartDetail.Volume }
+                    ).ToList();
+                return result;
+            }
+
+            
+            return null;
+        }
+
+        public object deleteCart(int id)
+        {
+            db.ProCartDetails_Delete(id);
+            return new { };
         }
     }
 }

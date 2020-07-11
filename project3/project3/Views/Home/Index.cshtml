@@ -134,13 +134,16 @@
                 <div class="product__item">
                     <div class="product__item-img">
                         <img src=@("https://localhost:44350/"+item.Image) alt="" />
-                        <a href="#"> Add to cart</a>
+                        <a href="#" onclick="addToCart(event,@item.Id_Bou,1)"  > Add to cart</a>
                         <span></span>
                     </div>
                     <a href=@("/Product/Detail/"+item.Id_Bou) class="product__item-name">
                         @item.Name
                     </a>
-                    <h5 class="product__item-sub">@item.Price D</h5>
+                
+                    <h5 class="product__item-sub">
+                        @Math.Round(item.Price, 2,MidpointRounding.ToEven)) D
+                                    </h5>
                 </div>
             }
         </div>

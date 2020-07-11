@@ -179,7 +179,7 @@
                 text-transform: uppercase;
             }
 
-            &-btn{
+            &-btn {
                 display: block;
                 width: 100%;
                 text-align: center;
@@ -190,9 +190,10 @@
                 padding: $px5 0;
                 text-transform: uppercase;
                 border-radius: $px5;
-                &:hover{
-                    color:white;
-                    background-color:$color-dark;
+
+                &:hover {
+                    color: white;
+                    background-color: $color-dark;
                 }
             }
         }
@@ -233,11 +234,11 @@
                 display: flex;
                 align-items: center;
                 color: $color-purple;
-                width: $px100;
                 transform: translateY(-10%);
                 margin-left: 20px;
 
                 p {
+                    width: $px120;
                     white-space: nowrap;
 
                     i {

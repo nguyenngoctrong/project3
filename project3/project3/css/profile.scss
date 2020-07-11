@@ -1,0 +1,86 @@
+﻿@import '~/css/_variable.scss';
+.address {
+    padding: 22px 0 32px 0;
+
+    &__box {
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        grid-gap: $px40;
+    }
+
+    &__input {
+        form {
+            display: grid;
+            grid-template-columns: repeat(2,1fr);
+            grid-template-rows: repeat(8,1fr);
+            align-items: center;
+            grid-row-gap: $px15;
+            grid-column-gap: $px10;
+
+            p {
+                font-size: $r-1-6;
+                white-space: nowrap;
+            }
+
+            input, select {
+                width: 300px;
+                padding: $px10 $px20;
+                font-size: $r-1-6;
+                border: $px1 solid $color-border;
+            }
+
+            input[type='submit'] {
+                font-size: 1.598rem;
+                padding: $px7 $px20;
+                border: none;
+                background-color: $color-twitter;
+                color: $color-white;
+                width: $px200;
+
+                &:hover {
+                    cursor: pointer;
+                    background-color: $color-gold;
+                }
+            }
+        }
+
+        &-checkbox {
+            grid-column: 2/3;
+
+            input {
+                width: initial;
+            }
+
+            label {
+                font-size: $px16;
+                margin-left: $px15;
+                color: $color-gray;
+            }
+        }
+
+        &-message {
+            font-size: $r-1-7;
+            color: $color-red;
+            font-style: italic;
+        }
+    }
+
+    &__item {
+        &-title {
+            font-size: $r-1-8;
+            text-transform: uppercase;
+            margin-bottom: $px30;
+
+            &.-link {
+                text-transform: initial;
+                color: $color-twitter;
+                border-bottom: 1px solid $color-twitter;
+                display: inline-block;
+            }
+        }
+    }
+
+    &__button {
+        grid-column: 2/3;
+    }
+}

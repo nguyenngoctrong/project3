@@ -692,7 +692,7 @@
             <Parameter Name="total_price" Mode="In" Type="Decimal" />
             <Parameter Name="statement" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="ProCartDetails_Update">
+          <FunctionImport Name="ProCartDetails_Update" ReturnType="Collection(JavaFloristModel.ProCartDetails_Update_Result)">
             <Parameter Name="id" Mode="In" Type="Int32" />
             <Parameter Name="Volume" Mode="In" Type="Int32" />
             <Parameter Name="total_price" Mode="In" Type="Decimal" />
@@ -783,6 +783,13 @@
           <Property Type="Decimal" Name="Total_Price" Nullable="true" Precision="19" Scale="4" />
         </ComplexType>
         <ComplexType Name="ProCartDetails_Read_Result">
+          <Property Type="Int32" Name="Id_Bou" Nullable="true" />
+          <Property Type="Int32" Name="Volume" Nullable="true" />
+          <Property Type="Decimal" Name="Total_Price" Nullable="true" Precision="19" Scale="4" />
+        </ComplexType>
+        <ComplexType Name="ProCartDetails_Update_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Int32" Name="Id_Cart" Nullable="true" />
           <Property Type="Int32" Name="Id_Bou" Nullable="true" />
           <Property Type="Int32" Name="Volume" Nullable="true" />
           <Property Type="Decimal" Name="Total_Price" Nullable="true" Precision="19" Scale="4" />
@@ -1024,7 +1031,17 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="ProCartDetails_Update" FunctionName="JavaFloristModel.Store.ProCartDetails_Update" />
+          <FunctionImportMapping FunctionImportName="ProCartDetails_Update" FunctionName="JavaFloristModel.Store.ProCartDetails_Update">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="JavaFloristModel.ProCartDetails_Update_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Id_Cart" ColumnName="Id_Cart" />
+                <ScalarProperty Name="Id_Bou" ColumnName="Id_Bou" />
+                <ScalarProperty Name="Volume" ColumnName="Volume" />
+                <ScalarProperty Name="Total_Price" ColumnName="Total_Price" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="ProCheck_U" FunctionName="JavaFloristModel.Store.ProCheck_U">
             <ResultMapping>
               <ComplexTypeMapping TypeName="JavaFloristModel.ProCheck_U_Result">

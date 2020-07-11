@@ -2,6 +2,8 @@
 using Models.FrameWork;
 using Models.Service;
 using project3.Models;
+using System.Web;
+using System;
 using System.Web.Mvc;
 using System.Web.Security;
 
@@ -16,7 +18,6 @@ namespace project3.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            product.AddToCart(2, 1028, 1);
             Home home = new Home();
             home.bouquests = product.getProduct();
             return View(home);
@@ -31,8 +32,10 @@ namespace project3.Controllers
             Customer dataItem = product.login(model);
             if(dataItem != null)
             {
+                Session["idUser"] = dataItem.Id_Cus;
+                var a = Session["idUser"];
                 FormsAuthentication.SetAuthCookie(dataItem.Email, false);
-                if(Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")&& !returnUrl.StartsWith("//") && !returnUrl.StartsWith("\\"))
+                if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")&& !returnUrl.StartsWith("//") && !returnUrl.StartsWith("\\"))
                 {
                     return Redirect(returnUrl);
                 }
@@ -51,6 +54,7 @@ namespace project3.Controllers
         [Authorize]
         public ActionResult Logout()
         {
+            Session.Remove("idUser");
             FormsAuthentication.SignOut();
             return RedirectToAction("Login","Home");
         }
@@ -89,7 +93,56 @@ namespace project3.Controllers
                 return View(model);
             }
         }
+        [Authorize]
 
+        public ActionResult GetCart()
+        {
+            var id = Session["idUser"];
+            if(id != null)
+            {
+                object a = product.getInforCart(Convert.ToInt32(id));
+                return Json(a, JsonRequestBehavior.AllowGet);
+
+            }
+            return Json(new { }, JsonRequestBehavior.AllowGet);
+
+        }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult AddToCart(int id_bou,int amount)
+        {
+            var id = Session["idUser"];
+            if(id != null)
+            {
+                JsonResult a = Json(product.AddToCart(Convert.ToInt32(id), id_bou, amount), JsonRequestBehavior.AllowGet);
+
+                return a;
+            }
+            return Json(new { }, JsonRequestBehavior.AllowGet);
+
+        }
+
+        [HttpPost]
+        [Authorize]
+
+        public ActionResult DeleteCart(int id)
+        {
+            product.deleteCart(id);
+            return Json(new { }, JsonRequestBehavior.AllowGet);
+
+        }
+        [HttpPost]
+        public ActionResult CheckLogin()
+        {
+            if (Session["idUser"] == null)
+            {
+                return Json(new { check = false }, JsonRequestBehavior.AllowGet);
+
+            }
+            return Json(new { check = true }, JsonRequestBehavior.AllowGet);
+
+        }
 
 
     }
