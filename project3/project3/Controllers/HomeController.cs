@@ -14,10 +14,11 @@ namespace project3.Controllers
     public class HomeController : Controller
     {
         private ProductModel product = new ProductModel();
-        private JavaFloristEntities db = new JavaFloristEntities();
         // GET: Home
         public ActionResult Index()
         {
+            var a = Hashing.HashPassword("123456");
+
             Home home = new Home();
             home.bouquests = product.getProduct();
             return View(home);

@@ -25,7 +25,6 @@ namespace project3
             bundles.Add(new StyleBundle("~/bootstrap/css").Include(
                       "~/Content/bootstrap.min.css"
                       ));
-
             bundles.Add(new ScriptBundle("~/bootstrap/js").Include(
                       "~/Scripts/bootstrap.min.js",
                       "~/Scripts/respond.js"
@@ -44,8 +43,7 @@ namespace project3
             bundles.Add(new ScriptBundle("~/Bundles/Scripts/profile").Include(
                       "~/Scripts/page/profile.js"));
 
-
-
+            //SCSS
             bundles.Add(new CustomStyleBundle("~/Bundle/sass").Include(
                       "~/css/reset.scss"));
             bundles.Add(new CustomStyleBundle("~/Bundle/home").Include(

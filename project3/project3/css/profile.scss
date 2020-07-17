@@ -1,4 +1,9 @@
 ﻿@import '~/css/_variable.scss';
+.infor-title{
+    display:block;
+    margin-top:168px;
+    @include title;
+}
 .address {
     padding: 22px 0 32px 0;
 

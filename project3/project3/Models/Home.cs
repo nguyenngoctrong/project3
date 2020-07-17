@@ -9,6 +9,6 @@ namespace project3.Models
     public class Home
     {
         public List<Bouquest> bouquests { get; set; }
-        public Customer customer { get; set; }
+        public CustomerInfor customer { get; set; }
     }
 }

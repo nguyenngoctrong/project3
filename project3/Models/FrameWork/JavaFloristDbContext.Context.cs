@@ -265,6 +265,19 @@ namespace Models.FrameWork
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ProCheck_U_Result>("ProCheck_U", emailParameter);
         }
     
+        public virtual int ProCus_ChangePassword(Nullable<int> id, string password)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("password", password) :
+                new ObjectParameter("password", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ProCus_ChangePassword", idParameter, passwordParameter);
+        }
+    
         public virtual ObjectResult<Nullable<decimal>> ProCus_Create(string email, string password, string firstName, string lastName, string image, Nullable<System.DateTime> birth, Nullable<int> id_Gender, string phone, string address, Nullable<int> id_Role)
         {
             var emailParameter = email != null ?
@@ -333,19 +346,11 @@ namespace Models.FrameWork
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ProCus_ReadOne_Result>("ProCus_ReadOne", idParameter);
         }
     
-        public virtual int ProCus_Update(Nullable<int> id, string email, string password, string firstName, string lastName, string image, Nullable<System.DateTime> birth, Nullable<int> id_Gender, string phone, string address, Nullable<int> id_Role)
+        public virtual int ProCus_Update(Nullable<int> id, string firstName, string lastName, string image, Nullable<System.DateTime> birth, string phone, string address)
         {
             var idParameter = id.HasValue ?
                 new ObjectParameter("id", id) :
                 new ObjectParameter("id", typeof(int));
-    
-            var emailParameter = email != null ?
-                new ObjectParameter("email", email) :
-                new ObjectParameter("email", typeof(string));
-    
-            var passwordParameter = password != null ?
-                new ObjectParameter("password", password) :
-                new ObjectParameter("password", typeof(string));
     
             var firstNameParameter = firstName != null ?
                 new ObjectParameter("firstName", firstName) :
@@ -363,10 +368,6 @@ namespace Models.FrameWork
                 new ObjectParameter("birth", birth) :
                 new ObjectParameter("birth", typeof(System.DateTime));
     
-            var id_GenderParameter = id_Gender.HasValue ?
-                new ObjectParameter("id_Gender", id_Gender) :
-                new ObjectParameter("id_Gender", typeof(int));
-    
             var phoneParameter = phone != null ?
                 new ObjectParameter("phone", phone) :
                 new ObjectParameter("phone", typeof(string));
@@ -375,11 +376,7 @@ namespace Models.FrameWork
                 new ObjectParameter("address", address) :
                 new ObjectParameter("address", typeof(string));
     
-            var id_RoleParameter = id_Role.HasValue ?
-                new ObjectParameter("id_Role", id_Role) :
-                new ObjectParameter("id_Role", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ProCus_Update", idParameter, emailParameter, passwordParameter, firstNameParameter, lastNameParameter, imageParameter, birthParameter, id_GenderParameter, phoneParameter, addressParameter, id_RoleParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ProCus_Update", idParameter, firstNameParameter, lastNameParameter, imageParameter, birthParameter, phoneParameter, addressParameter);
         }
     
         public virtual ObjectResult<ProLogin_Result> ProLogin(string email, string password)

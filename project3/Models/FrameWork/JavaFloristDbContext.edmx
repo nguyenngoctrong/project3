@@ -276,6 +276,10 @@
         <Function Name="ProCheck_U" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="email" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="ProCus_ChangePassword" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="password" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="ProCus_Create" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="email" Type="varchar" Mode="In" />
           <Parameter Name="password" Type="varchar" Mode="In" />
@@ -297,16 +301,12 @@
         </Function>
         <Function Name="ProCus_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
-          <Parameter Name="email" Type="varchar" Mode="In" />
-          <Parameter Name="password" Type="varchar" Mode="In" />
           <Parameter Name="firstName" Type="varchar" Mode="In" />
           <Parameter Name="lastName" Type="varchar" Mode="In" />
           <Parameter Name="image" Type="varchar" Mode="In" />
           <Parameter Name="birth" Type="date" Mode="In" />
-          <Parameter Name="id_Gender" Type="int" Mode="In" />
           <Parameter Name="phone" Type="varchar" Mode="In" />
           <Parameter Name="address" Type="varchar" Mode="In" />
-          <Parameter Name="id_Role" Type="int" Mode="In" />
         </Function>
         <Function Name="ProLogin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="email" Type="varchar" Mode="In" />
@@ -700,6 +700,10 @@
           <FunctionImport Name="ProCheck_U" ReturnType="Collection(JavaFloristModel.ProCheck_U_Result)">
             <Parameter Name="email" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="ProCus_ChangePassword">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="password" Mode="In" Type="String" />
+          </FunctionImport>
           <FunctionImport Name="ProCus_Create" ReturnType="Collection(Decimal)">
             <Parameter Name="email" Mode="In" Type="String" />
             <Parameter Name="password" Mode="In" Type="String" />
@@ -721,16 +725,12 @@
           </FunctionImport>
           <FunctionImport Name="ProCus_Update">
             <Parameter Name="id" Mode="In" Type="Int32" />
-            <Parameter Name="email" Mode="In" Type="String" />
-            <Parameter Name="password" Mode="In" Type="String" />
             <Parameter Name="firstName" Mode="In" Type="String" />
             <Parameter Name="lastName" Mode="In" Type="String" />
             <Parameter Name="image" Mode="In" Type="String" />
             <Parameter Name="birth" Mode="In" Type="DateTime" />
-            <Parameter Name="id_Gender" Mode="In" Type="Int32" />
             <Parameter Name="phone" Mode="In" Type="String" />
             <Parameter Name="address" Mode="In" Type="String" />
-            <Parameter Name="id_Role" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="ProLogin" ReturnType="Collection(JavaFloristModel.ProLogin_Result)">
             <Parameter Name="email" Mode="In" Type="String" />
@@ -1059,6 +1059,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ProCus_ChangePassword" FunctionName="JavaFloristModel.Store.ProCus_ChangePassword" />
           <FunctionImportMapping FunctionImportName="ProCus_Create" FunctionName="JavaFloristModel.Store.ProCus_Create" />
           <FunctionImportMapping FunctionImportName="ProCus_Delete" FunctionName="JavaFloristModel.Store.ProCus_Delete" />
           <FunctionImportMapping FunctionImportName="ProCus_ReadMulti" FunctionName="JavaFloristModel.Store.ProCus_ReadMulti">

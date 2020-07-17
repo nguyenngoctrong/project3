@@ -7,6 +7,7 @@ namespace project3.Models
 {
     public class Profile
     {
-
+        public Password password { get; set; }
+        public CustomerInfor customerInfor { get; set; }
     }
 }

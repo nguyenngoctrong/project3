@@ -1,5 +1,6 @@
 ﻿using Models.FrameWork;
 using Models.Service;
+using project3.Models;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Core.Objects;
@@ -183,6 +184,41 @@ namespace Models
         {
             db.ProCartDetails_Delete(id);
             return new { };
+        }
+        public CustomerInfor GetCustomers( int id)
+        {
+            var result = db.Customers.Where(x => x.Id_Cus == id).Join(db.Roles,customer=>customer.Id_Role,role=>role.Id_Role, 
+                (customer,role) => new CustomerInfor
+                {
+                    Email=customer.Email,
+                    FirstName=customer.FirstName,
+                    LastName=customer.LastName,
+                    Phone=customer.Phone,
+                    Address=customer.Address,
+                    Birth=customer.Birth,
+                    Role=role.Role_Define
+                }
+                
+                ).FirstOrDefault();
+            return result;
+        }
+        public int UpdateCustomer ( int id, CustomerInfor cus)
+        {
+            int result = db.ProCus_Update(id, cus.FirstName, cus.LastName, null, cus.Birth, cus.Phone, cus.Address);
+            return result;
+        }
+        public dynamic ChangePassword(int id,string password ,string newPassword)
+        {
+            var ps = db.Customers.Where(x => x.Id_Cus == id).FirstOrDefault();
+
+            bool check = Hashing.ValidatePassword(password, ps.Password);
+            if (check)
+            {
+                int result = db.ProCus_ChangePassword(id, Hashing.HashPassword(newPassword));
+                return result;
+            }
+            return null;
+
         }
     }
 }
