@@ -1,4 +1,6 @@
-﻿@model List<Models.FrameWork.Bouquest>
+﻿@using project3.Models
+@model Home
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -9,138 +11,138 @@
 @section scripts{
     @Scripts.Render("~/Bundles/Scripts/home")
 }
-    <section class="slide" id="slideContent">
-        <div class="container">
-            <div class="slide__content">
-                <div class="slide__item active ">
-                    <p class="slide__item-title active">
-                        Welcome to Rosebud
-                    </p>
-                    <p class="slide__item-sub">
-                        Perfect bouquet
-                    </p>
-                    <p class="slide__item-description">
-                        A simply gorgeous WordPress theme packed with everything you will need to create a delightful website for your flower shop or florist business quickly and with ease.
-                    </p>
-                    <div class="slide__item-btn">
-                        <a href="/">
-                            Read more
-                        </a>
-                        <a href="/">
-                            Read more
-                        </a>
-                    </div>
-                </div>
-                <div class="slide__item">
-                    <p class="slide__item-title">
-                        Welcome to Rosebud
-                    </p>
-                    <p class="slide__item-sub">
-                        florist's  dream
-                    </p>
-                    <p class="slide__item-description">
-                        A simply gorgeous WordPress theme packed with everything you will need to create a delightful website for your flower shop or florist business quickly and with ease.
-                    </p>
-                    <div class="slide__item-btn">
-                        <a href="/">
-                            Read more
-                        </a>
-                        <a href="/">
-                            Read more
-                        </a>
-                    </div>
-                </div>
-                <div class="slide__item">
-                    <p class="slide__item-title">
-                        Welcome to Rosebud
-                    </p>
-                    <p class="slide__item-sub">
-                        time to blossom
-                    </p>
-                    <p class="slide__item-description">
-                        A simply gorgeous WordPress theme packed with everything you will need to create a delightful website for your flower shop or florist business quickly and with ease.
-                    </p>
-                    <div class="slide__item-btn">
-                        <a href="/">
-                            Read more
-                        </a>
-                        <a href="/">
-                            Read more
-                        </a>
-                    </div>
+<section class="slide" id="slideContent">
+    <div class="container">
+        <div class="slide__content">
+            <div class="slide__item active ">
+                <p class="slide__item-title active">
+                    Welcome to Rosebud
+                </p>
+                <p class="slide__item-sub">
+                    Perfect bouquet
+                </p>
+                <p class="slide__item-description">
+                    A simply gorgeous WordPress theme packed with everything you will need to create a delightful website for your flower shop or florist business quickly and with ease.
+                </p>
+                <div class="slide__item-btn">
+                    <a href="/">
+                        Read more
+                    </a>
+                    <a href="/">
+                        Read more
+                    </a>
                 </div>
             </div>
-            <div class="slide__checkbox">
-                <input type="radio" name="slide" id="slide1" checked />
-                <label for="slide1">
-                </label>
-                <input type="radio" name="slide" id="slide2" />
-                <label for="slide2">
-                </label>
-                <input type="radio" name="slide" id="slide3" />
-                <label for="slide3">
-                </label>
+            <div class="slide__item">
+                <p class="slide__item-title">
+                    Welcome to Rosebud
+                </p>
+                <p class="slide__item-sub">
+                    florist's  dream
+                </p>
+                <p class="slide__item-description">
+                    A simply gorgeous WordPress theme packed with everything you will need to create a delightful website for your flower shop or florist business quickly and with ease.
+                </p>
+                <div class="slide__item-btn">
+                    <a href="/">
+                        Read more
+                    </a>
+                    <a href="/">
+                        Read more
+                    </a>
+                </div>
             </div>
-        </div>
-    </section>
-    <section class="introduce">
-        <div class="container">
-            <div class="introduce__list">
-                <div class="introduce__item">
-                    <img src="~/img/icon1.png" alt="" />
-                    <h5 class="introduce__item-name">
-                        Ready To Be Impressed
-                    </h5>
-                    <p class="introduce__item-sub">
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatem assumenda quaerat vel ducimus aspernatur non facere architecto distinctio minus numquam, ad praesentium, totam ratione incidunt reiciendis deserunt quis, voluptas dolorem.
-                    </p>
-                </div>
-                <div class="introduce__item">
-                    <img src="~/img/icon2.png" alt="" />
-                    <h5 class="introduce__item-name">
-                        Ready To Be Impressed
-                    </h5>
-                    <p class="introduce__item-sub">
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatem assumenda quaerat vel ducimus aspernatur non facere architecto distinctio minus numquam, ad praesentium, totam ratione incidunt reiciendis deserunt quis, voluptas dolorem.
-                    </p>
-                </div>
-                <div class="introduce__item">
-                    <img src="~/img/icon3.png" alt="" />
-                    <h5 class="introduce__item-name">
-                        Ready To Be Impressed
-                    </h5>
-                    <p class="introduce__item-sub">
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatem assumenda quaerat vel ducimus aspernatur non facere architecto distinctio minus numquam, ad praesentium, totam ratione incidunt reiciendis deserunt quis, voluptas dolorem.
-                    </p>
+            <div class="slide__item">
+                <p class="slide__item-title">
+                    Welcome to Rosebud
+                </p>
+                <p class="slide__item-sub">
+                    time to blossom
+                </p>
+                <p class="slide__item-description">
+                    A simply gorgeous WordPress theme packed with everything you will need to create a delightful website for your flower shop or florist business quickly and with ease.
+                </p>
+                <div class="slide__item-btn">
+                    <a href="/">
+                        Read more
+                    </a>
+                    <a href="/">
+                        Read more
+                    </a>
                 </div>
             </div>
         </div>
-    </section>
-    <section class="product">
-        <div class="container">
-            <div class="product__title">
-                <h3 class="product__title-name">
-                    Wonderful gift
-                </h3>
-                <h2 class="product__title-sub">
-                    Our wonderful arrangements
-                </h2>
+        <div class="slide__checkbox">
+            <input type="radio" name="slide" id="slide1" checked />
+            <label for="slide1">
+            </label>
+            <input type="radio" name="slide" id="slide2" />
+            <label for="slide2">
+            </label>
+            <input type="radio" name="slide" id="slide3" />
+            <label for="slide3">
+            </label>
+        </div>
+    </div>
+</section>
+<section class="introduce">
+    <div class="container">
+        <div class="introduce__list">
+            <div class="introduce__item">
+                <img src="~/img/icon1.png" alt="" />
+                <h5 class="introduce__item-name">
+                    Ready To Be Impressed
+                </h5>
+                <p class="introduce__item-sub">
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatem assumenda quaerat vel ducimus aspernatur non facere architecto distinctio minus numquam, ad praesentium, totam ratione incidunt reiciendis deserunt quis, voluptas dolorem.
+                </p>
             </div>
-            <div class="product__list">
-                @foreach (var item in Model)
-                {
-                    <div class="product__item">
-                        <div class="product__item-img">
-                            <img src=@item.Image alt="" />
-                            <a href="#"> Add to cart</a>
-                            <span></span>
-                        </div>
-                        <h3 class="product__item-name">
-                            @item.Name
-                        </h3>
-                        <h5 class="product__item-sub">@item.Price D</h5>
-                    </div>
-                }
+            <div class="introduce__item">
+                <img src="~/img/icon2.png" alt="" />
+                <h5 class="introduce__item-name">
+                    Ready To Be Impressed
+                </h5>
+                <p class="introduce__item-sub">
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatem assumenda quaerat vel ducimus aspernatur non facere architecto distinctio minus numquam, ad praesentium, totam ratione incidunt reiciendis deserunt quis, voluptas dolorem.
+                </p>
+            </div>
+            <div class="introduce__item">
+                <img src="~/img/icon3.png" alt="" />
+                <h5 class="introduce__item-name">
+                    Ready To Be Impressed
+                </h5>
+                <p class="introduce__item-sub">
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatem assumenda quaerat vel ducimus aspernatur non facere architecto distinctio minus numquam, ad praesentium, totam ratione incidunt reiciendis deserunt quis, voluptas dolorem.
+                </p>
             </div>
         </div>
-    </section>
+    </div>
+</section>
+<section class="product">
+    <div class="container">
+        <div class="title">
+            <h3 class="title-name">
+                Wonderful gift
+            </h3>
+            <h2 class="title-sub">
+                Our wonderful arrangements
+            </h2>
+        </div>
+        <div class="product__list">
+            @foreach (var item in Model.bouquests)
+            {
+                <div class="product__item">
+                    <div class="product__item-img">
+                        <img src=@("https://localhost:44350/"+item.Image) alt="" />
+                        <a href="#"> Add to cart</a>
+                        <span></span>
+                    </div>
+                    <a href=@("/Product/Detail/"+item.Id_Bou) class="product__item-name">
+                        @item.Name
+                    </a>
+                    <h5 class="product__item-sub">@item.Price D</h5>
+                </div>
+            }
+        </div>
+    </div>
+</section>

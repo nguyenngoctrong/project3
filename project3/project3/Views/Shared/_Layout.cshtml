@@ -5,12 +5,16 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/bootstrap/css")
     @Styles.Render("~/icon/css")
     @Styles.Render("~/Bundle/sass")
     @Styles.Render("~/Bundle/main")
     @RenderSection("AddCss", required: false)
 </head>
 <body>
+    @Scripts.Render("~/jquery/js")
+    @Scripts.Render("~/bootstrap/js")
+    @Scripts.Render("~/Bundles/Scripts/axios")
     @RenderPage("header.cshtml")
     @RenderBody()
     @RenderPage("footer.cshtml")

@@ -1,0 +1,101 @@
+﻿@import '_variable.scss';
+@include titleProduct;
+@include pagination;
+.product {
+    margin-top: 100px;
+    background-color: white;
+
+    &__action {
+        display:flex;
+        align-items:center;
+        &-search{
+            margin-right:20px;
+        }
+        &-search,select {
+            font-size: 1.7rem;
+            border: 1px solid $color-border1;
+            padding: 5px;
+
+            &::placeholder {
+                font-style: italic;
+                font-size: 1.3rem;
+            }
+
+            &:focus {
+                border: 1px solid $color-dark;
+            }
+        }
+        &-group{
+            display:flex;
+            align-items:center;
+        }
+        &-title{
+            font-size:2rem;
+            margin-right:10px;
+        }
+    }
+}
+.detail {
+    margin-top: 100px;
+    background-color: white;
+    @include title;
+    @include addToCartButton;
+
+    &__box {
+        margin-top: 30px;
+    }
+
+    &__img {
+        height: 500px;
+    }
+
+    &__infor {
+        &-title {
+            font-size: 4rem;
+            font-family: $font-main1;
+            font-weight: 500;
+        }
+
+        &-price {
+            font-size: 3rem;
+            color: $color-gray;
+        }
+
+        &-status {
+            font-family: $font-main1;
+            font-weight: bold;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+
+            span {
+                font-weight: 500;
+            }
+        }
+
+        &-description{
+            display:inline-block;
+            font-size:3rem;
+            margin-top:10px;
+            padding-bottom:2px;
+            border-bottom:2px solid $color-black;
+        }
+        &-content{
+            max-width:500px;
+            font-size:1.8rem;
+            color:$color-gray;
+            margin-top:20px;
+        }
+    }
+}
+@media all and (min-width:$breakpoint-lg){
+    .detail{
+        &__img{
+            margin-right:30px;
+            width:500px
+        }
+        &__box{
+            display:flex;
+
+        }
+    }
+}

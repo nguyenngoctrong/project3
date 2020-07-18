@@ -1,0 +1,132 @@
+﻿@model IEnumerable<project3.Models.AdminCustomer>
+
+@{
+    ViewBag.Title = "ManageCustomer";
+    Layout = "~/Views/Shared/_SideBar.cshtml";
+}
+
+<div class="container-fluid">
+    <h1 class="mt-4">Customer Management</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+        <li class="breadcrumb-item active">Customer</li>
+    </ol>
+    <div class="card mb-4">
+        <div class="card-body">
+            INSTRUCTIONS
+            <hr />
+            <a target="_blank" href="https://datatables.net/">official DataTables documentation</a>
+            .
+        </div>
+    </div>
+    <div class="card mb-4">
+        <div class="card-body">
+            <a>
+                @Html.ActionLink("Create New User", "CreateCustomer")
+            </a>
+        </div>
+    </div>
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-table mr-1"></i>
+            DataTable
+        </div>
+        <div class="container card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayName("Id")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Image")
+                            </th>
+                            <th>
+                                @Html.DisplayName("FullName")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Birthday")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Gender")
+                            </th>
+                            <th>
+                                @Html.DisplayName("PhoneNumber")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Address")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Option")
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>
+                                @Html.DisplayName("Id")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Image")
+                            </th>
+                            <th>
+                                @Html.DisplayName("FullName")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Birthday")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Gender")
+                            </th>
+                            <th>
+                                @Html.DisplayName("PhoneNumber")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Address")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Option")
+                            </th>
+                            <th></th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Id_Cus)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Image)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.FullName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Birth)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Gender)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Phone)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Address)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Details", "DetailsCustomer", new { id = item.Id_Cus }) |
+                                    @Html.ActionLink("Edit", "EditCustomer", new { id = item.Id_Cus }) |
+                                    @Html.ActionLink("Delete", "DeleteCustomer", new { id = item.Id_Cus })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

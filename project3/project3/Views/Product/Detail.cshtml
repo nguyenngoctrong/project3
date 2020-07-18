@@ -1,0 +1,54 @@
+﻿@model Models.FrameWork.Bouquest 
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section AddCss{
+    @Styles.Render("~/Bundle/product")
+}
+@section scripts{
+    @Scripts.Render("~/Bundles/Scripts/product")
+}
+<section class="detail">
+    <div class="container">
+        <div class="title">
+            <h3 class="title-name">
+                Welcome
+            </h3>
+            <h2 class="title-sub">
+                Detail Product
+            </h2>
+        </div>
+        <div class="detail__box">
+            <div class="detail__img">
+                <img src=@("https://localhost:44350/"+Model.Image) alt="" />
+            </div>
+            <div class="detail__infor">
+                <h2 class="detail__infor-title">
+                    @(Model.Name)
+
+                </h2>
+                <h3 class="detail__infor-price">
+                    @(Model.Price)
+                </h3>
+                <p class="detail__infor-status">
+                    Status : <span> @(Model.Status) </span>
+                </p>
+                <div class="btn-cart">
+                    <div>
+                        <button><i class="fas fa-minus"></i></button>
+                        <input type="text" readOnly />
+                        <button><i class="fas fa-plus"></i></button>
+                    </div>
+                    <button> Add to cart </button>
+                </div>
+                <h3 class="detail__infor-description">
+                    Description
+                </h3>
+                <p class="detail__infor-content">
+                    @(Model.Description)
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
