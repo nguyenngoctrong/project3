@@ -1,0 +1,121 @@
+﻿@model Admination.Bouquest
+@{
+    ViewBag.Title = "BouquetDetails";
+    Layout = "~/Views/Shared/_SideBar.cshtml";
+}
+
+
+    <div class="container-fluid">
+        <h1 class="mt-4">Bouquet Details</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item">
+                <a href="@Url.Action("Index", null, new { area = string.Empty, controller = "Admin" }, Request.Url.Scheme)">
+                    Dashboard
+                </a>
+            </li>
+            <li class="breadcrumb-item active">Page</li>
+            <li class="breadcrumb-item active">Finance</li>
+            <li class="breadcrumb-item active">Bouquets</li>
+        </ol>
+        <div class="card mb-4">
+            <div class="card-body">
+                INSTRUCTIONS
+                <hr />
+                <a>Show Bouquet's details.</a>
+                <p>***</p>
+            </div>
+        </div>
+
+        <div class="container-fluid card mb-4">
+            <hr />
+            <div class="row card-body">
+                <div class="col-md-6">
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.LabelFor(m => m.Id_Bou, "ID")
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Id_Bou)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Image)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Image)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Name)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Name)
+                        </dd>
+
+                    </dl>
+                </div>
+                <div class="col-md-6">
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Description)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Description)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Price)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Price)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Status)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Status)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayName("Seller ID")
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Id_Cus)
+                            @Html.ActionLink("▻ Details", "DetailsCustomer", new { id = Model.Id_Cus })
+                        </dd>
+                    </dl>
+                </div>
+
+
+            </div>
+            <hr />
+        </div>
+        <div class="card mb-4">
+            <div class="card-body">
+                <a>
+                    @Html.ActionLink("Edit", "BouquetEdit", new { id = Model.Id_Bou}) or
+                    @Html.ActionLink("Delete", "BouquetDelete", new { id = Model.Id_Bou })
+                </a>
+            </div>
+        </div>
+
+        <div>
+            <ol class="breadcrumb mb-4">
+                <li class="breadcrumb-item">
+                    <p>
+                        @Html.ActionLink("Back to List", "Bouquets")
+
+                    </p>
+                </li>
+            </ol>
+        </div>
+
+    </div>

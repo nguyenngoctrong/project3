@@ -1,0 +1,143 @@
+﻿@model Admination.Bill
+@{
+    ViewBag.Title = "BillDetails";
+    Layout = "~/Views/Shared/_SideBar.cshtml";
+}
+
+
+    <div class="container-fluid">
+        <h1 class="mt-4">Bill Details</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item">
+                <a href="@Url.Action("Index", null, new { area = string.Empty, controller = "Admin" }, Request.Url.Scheme)">
+                    Dashboard
+                </a>
+            </li>
+            <li class="breadcrumb-item active">Page</li>
+            <li class="breadcrumb-item active">Finance</li>
+            <li class="breadcrumb-item active">Bills</li>
+        </ol>
+        <div class="card mb-4">
+            <div class="card-body">
+                INSTRUCTIONS
+                <hr />
+                <a>Show bill's details</a>
+            </div>
+        </div>
+
+        <div class="container-fluid card mb-4">
+            <hr />
+            <div class="row card-body">
+                <div class="col-md-6">
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayName("Id")
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Id_Bou)
+                            @Html.ActionLink(" ▻▻▻ Details", "BouquetDetails", new { id = Model.Id_Bou })
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayName("Seller Id")
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Id_Cus)
+                            @Html.ActionLink(" ▻▻▻ Details", "DetailsCustomer", new { id = Model.Id_Cus })
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Name)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Name)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Image)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Image)
+                        </dd>
+
+                    </dl>
+                </div>
+                <div class="col-md-6">
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Price)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Price)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Volume)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Volume)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayName("Order Date")
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Order_Date)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayName("Delivery Date")
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Delivery_Date)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayName("Note")
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Cus_Note)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayName("Status")
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Bill_Status)
+                        </dd>
+
+                    </dl>
+                </div>
+            </div>
+            <hr />
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-body">
+                <a>
+                    @Html.ActionLink("Edit", "BillEdit", new { id = Model.Id_Bou }) 
+                </a>
+            </div>
+        </div>
+
+        <div>
+            <ol class="breadcrumb mb-4">
+                <li class="breadcrumb-item">
+                    <p>
+                        @Html.ActionLink("Back to List", "Bill")
+
+                    </p>
+                </li>
+            </ol>
+        </div>
+    </div>
