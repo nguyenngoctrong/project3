@@ -1,0 +1,62 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section AddCss{
+    @Styles.Render("~/Bundle/purchase")
+}
+@section scripts{
+    @Scripts.Render("~/Bundles/Scripts/purchase")
+}
+    <div class="infor-title">
+        <div class="container">
+            <div class="title">
+                <h3 class="title-name">
+                    Rosebud
+                </h3>
+                <h2 class="title-sub">
+                    Your Bag
+                </h2>
+            </div>
+        </div>
+    </div>
+    <section class="cart">
+        <div class="container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Image</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Amount</th>
+                        <th>Total Price</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody id="bodyCart">
+                </tbody>
+
+
+            </table>
+            <div class="cart__btn">
+                <div class="cart__btn-box">
+                    <h1>
+                        Total Price
+                    </h1>
+                    <h2 id="totalPrice">
+                    </h2>
+                </div>
+                <div class="cart__btn-box">
+                    <a href="#">
+                        Purchase
+                    </a>
+                </div>
+            </div>
+            </div>
+</section>
+<script>
+        document.querySelector(".header").classList.add("active");
+
+</script>

@@ -17,8 +17,6 @@ namespace project3.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            var a = Hashing.HashPassword("123456");
-
             Home home = new Home();
             home.bouquests = product.getProduct();
             return View(home);

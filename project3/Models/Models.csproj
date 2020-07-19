@@ -154,6 +154,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomerInfor.cs" />
+    <Compile Include="BillInfor.cs" />
     <Compile Include="FrameWork\Bill.cs">
       <DependentUpon>JavaFloristDbContext.tt</DependentUpon>
     </Compile>
@@ -224,6 +225,12 @@
       <DependentUpon>JavaFloristDbContext.tt</DependentUpon>
     </Compile>
     <Compile Include="FrameWork\Role.cs">
+      <DependentUpon>JavaFloristDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FrameWork\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>JavaFloristDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FrameWork\sp_helpdiagrams_Result.cs">
       <DependentUpon>JavaFloristDbContext.tt</DependentUpon>
     </Compile>
     <Compile Include="FrameWork\sysdiagram.cs">

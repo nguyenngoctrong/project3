@@ -42,6 +42,8 @@ namespace project3
                       "~/Scripts/page/product.js"));
             bundles.Add(new ScriptBundle("~/Bundles/Scripts/profile").Include(
                       "~/Scripts/page/profile.js"));
+            bundles.Add(new ScriptBundle("~/Bundles/Scripts/purchase").Include(
+                      "~/Scripts/page/purchase.js"));
 
             //SCSS
             bundles.Add(new CustomStyleBundle("~/Bundle/sass").Include(
@@ -54,6 +56,8 @@ namespace project3
                       "~/css/product.scss"));
             bundles.Add(new CustomStyleBundle("~/Bundle/profile").Include(
                       "~/css/profile.scss"));
+            bundles.Add(new CustomStyleBundle("~/Bundle/purchase").Include(
+                      "~/css/purchase.scss"));
         }
     }
 }

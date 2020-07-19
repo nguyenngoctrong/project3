@@ -21,7 +21,7 @@ namespace project3.Models
         public string LastName { get; set; }
 
         [DisplayName("Phone Number")]
-        [RegularExpression(@"/(09|01|07[2|6|8|9])+([0-9]{7,9})\b/g", ErrorMessage = "Phone Number is invalid !")]
+        [RegularExpression(@"(09|01|07[2|6|8|9])+([0-9]{7,9})\b", ErrorMessage = "Phone Number is invalid !")]
         public string Phone { get; set; }
         public string Address { get; set; }
         [DataType(DataType.Date)]

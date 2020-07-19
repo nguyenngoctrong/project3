@@ -1,6 +1,7 @@
 ﻿using Models.FrameWork;
 using Models.Service;
 using project3.Models;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Core.Objects;
@@ -171,7 +172,7 @@ namespace Models
                 var result = db.CartDetails.Where(x => x.Id_Cart == idCart).Join(db.Bouquests,
                     cartDetail => cartDetail.Id_Bou,
                     bouquest => bouquest.Id_Bou,
-                    (cartDetail, bouquest) => new {id=cartDetail.Id, id_cart = cartDetail.Id_Cart, Name = bouquest.Name, Img = bouquest.Image, Price = bouquest.Price, TotalPrice = cartDetail.Total_Price, amount = cartDetail.Volume }
+                    (cartDetail, bouquest) => new {id=cartDetail.Id, id_cart = cartDetail.Id_Cart , id_bou=bouquest.Id_Bou, Name = bouquest.Name, Img = bouquest.Image, Price = bouquest.Price, TotalPrice = cartDetail.Total_Price, amount = cartDetail.Volume }
                     ).ToList();
                 return result;
             }
@@ -202,6 +203,29 @@ namespace Models
                 ).FirstOrDefault();
             return result;
         }
+        public Customer  GetCustomerDetail(int id)
+        {
+            var result = db.ProCus_ReadOne(id).FirstOrDefault();
+            if(result == null)
+            {
+                return new Customer();
+            }
+            return new Customer
+            {
+                Id_Cus = result.Id_Cus,
+                Email = result.Email,
+                Password = result.Password,
+                FirstName = result.FirstName,
+                LastName = result.LastName,
+                Image = result.Image,
+                Birth = result.Birth,
+                Phone = result.Phone,
+                Address = result.Address,
+                Id_Role = result.Id_Role,
+                Id_Gender = result.Id_Gender
+
+            };
+        }
         public int UpdateCustomer ( int id, CustomerInfor cus)
         {
             int result = db.ProCus_Update(id, cus.FirstName, cus.LastName, null, cus.Birth, cus.Phone, cus.Address);
@@ -219,6 +243,44 @@ namespace Models
             }
             return null;
 
+        }
+        public int TotalPrice(int? idCus)
+        {
+            if (idCus != null)
+            {
+                var idCart = db.Carts.Where(x => x.Id_Cus == idCus).FirstOrDefault().Id_Cart;
+
+                var result = db.CartDetails.Where(x => x.Id_Cart == idCart).Join(db.Bouquests,
+                    cartDetail => cartDetail.Id_Bou,
+                    bouquest => bouquest.Id_Bou,
+                    (cartDetail, bouquest) => new { id = cartDetail.Id, id_cart = cartDetail.Id_Cart, id_bou = bouquest.Id_Bou, Name = bouquest.Name, Img = bouquest.Image, Price = bouquest.Price, TotalPrice = cartDetail.Total_Price, amount = cartDetail.Volume }
+                    ).ToList();
+                int sum = 0;
+                result.ForEach(item =>
+                {
+                    sum += (int) item.TotalPrice;
+
+                });
+                return sum;
+            }
+            return 0;
+        }
+
+        public int Purchase(BillInfor bill, int? idCus)
+        {
+            var idCart = db.Carts.Where(x => x.Id_Cus == idCus).FirstOrDefault().Id_Cart;
+
+            var result = db.CartDetails.Where(x => x.Id_Cart == idCart).Join(db.Bouquests,
+                               cartDetail => cartDetail.Id_Bou,
+                               bouquest => bouquest.Id_Bou,
+                               (cartDetail, bouquest) => new { id = cartDetail.Id, id_cart = cartDetail.Id_Cart, id_bou = bouquest.Id_Bou, Name = bouquest.Name, Img = bouquest.Image, Price = bouquest.Price, TotalPrice = cartDetail.Total_Price, amount = cartDetail.Volume }
+                               ).ToList();
+            result.ForEach(item =>
+            {
+                db.ProBill_Create(null, item.id_bou, bill.Name, null, null, item.Price, idCus, item.amount, DateTime.Now, null, bill.Cus_Note, "Shipping");
+                db.ProCartDetails_Delete(item.id);
+            });
+            return 0;
         }
     }
 }

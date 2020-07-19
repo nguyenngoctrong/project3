@@ -32,7 +32,7 @@ const loadCart = () => {
                                     <p class="cart__item-price">
                                         <i class="fas fa-dollar-sign"></i><span>${parseInt(item.amount) > 1 ? (item.Price + " X " + item.amount) : item.Price}</span><span></span>
                                     </p>
-                                    <button onclick="deleteCart(event,${item.id})" >Delete</button>
+                                    <button onclick="deleteCart(event,${item.id}),afterDeleteCart(Cart${item.id })" >Delete</button>
                                 </div>
                             </div>`
             })
