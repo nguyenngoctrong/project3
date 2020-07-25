@@ -1,0 +1,125 @@
+﻿@model IEnumerable<project3.Models.BillModel>
+
+@{
+    ViewBag.Title = "Bill";
+    Layout = "~/Views/Shared/_SideBar.cshtml";
+}
+
+<div class="container-fluid">
+    <h1 class="mt-4">Bills Management</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+        <li class="breadcrumb-item active">Seller</li>
+    </ol>
+    <div class="card mb-4">
+        <div class="card-body">
+            INSTRUCTIONS
+            <a>***</a>
+            <hr/>
+        </div>
+    </div>    
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-table mr-1"></i>
+            DataTable
+        </div>
+        <div class="container card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayName("Id")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Buyer")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Bouquest")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Price")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Volume")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Delivery Date")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Status")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Options")
+                            </th>
+                            
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>
+                                @Html.DisplayName("Id")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Buyer")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Bouquest")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Price")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Volume")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Delivery Date")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Status")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Options")
+                            </th>
+                            
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Id_Bill)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Id_Cus)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Price)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Volume)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Delivery_Date)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Bill_Status)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Details", "BillDetails", new { id = item.Id_Bill }) |
+                                    @Html.ActionLink("Edit", "BillEdit", new { id = item.Id_Bill })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+

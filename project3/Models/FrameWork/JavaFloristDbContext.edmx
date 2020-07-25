@@ -208,6 +208,7 @@
           </ReferentialConstraint>
         </Association>
         <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="Pro_ReadShop" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="ProBill_Create" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id_Bill" Type="int" Mode="In" />
           <Parameter Name="id_Bou" Type="int" Mode="In" />
@@ -222,6 +223,7 @@
           <Parameter Name="cus_Note" Type="nvarchar" Mode="In" />
           <Parameter Name="bill_status" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="ProBill_ReadAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="ProBill_ReadAllBillByBouquest" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id_Bou" Type="int" Mode="In" />
         </Function>
@@ -244,6 +246,7 @@
           <Parameter Name="id_Bill" Type="int" Mode="In" />
           <Parameter Name="status" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="ProBouReadAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="ProCart_CreateGetId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id_Cus" Type="int" Mode="In" />
         </Function>
@@ -662,6 +665,7 @@
             <End Role="Role" EntitySet="Roles" />
             <End Role="Customer" EntitySet="Customers" />
           </AssociationSet>
+          <FunctionImport Name="Pro_ReadShop" ReturnType="Collection(JavaFloristModel.Pro_ReadShop_Result)" />
           <FunctionImport Name="ProBill_Create">
             <Parameter Name="id_Bill" Mode="In" Type="Int32" />
             <Parameter Name="id_Bou" Mode="In" Type="Int32" />
@@ -676,6 +680,7 @@
             <Parameter Name="cus_Note" Mode="In" Type="String" />
             <Parameter Name="bill_status" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="ProBill_ReadAll" ReturnType="Collection(JavaFloristModel.ProBill_ReadAll_Result)" />
           <FunctionImport Name="ProBill_ReadAllBillByBouquest" ReturnType="Collection(JavaFloristModel.ProBill_ReadAllBillByBouquest_Result)">
             <Parameter Name="id_Bou" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -698,6 +703,7 @@
             <Parameter Name="id_Bill" Mode="In" Type="Int32" />
             <Parameter Name="status" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="ProBouReadAll" ReturnType="Collection(JavaFloristModel.ProBouReadAll_Result)" />
           <FunctionImport Name="ProCart_CreateGetId" ReturnType="Collection(Int32)">
             <Parameter Name="id_Cus" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -807,6 +813,35 @@
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
         </EntityContainer>
+        <ComplexType Name="Pro_ReadShop_Result">
+          <Property Type="Int32" Name="Id_Cus" Nullable="false" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Password" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="FirstName" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="LastName" Nullable="true" MaxLength="10" />
+          <Property Type="DateTime" Name="Birth" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Image" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Id_Gender" Nullable="true" />
+          <Property Type="String" Name="Gender_Define" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Phone" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="Address" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="Id_Role" Nullable="true" />
+          <Property Type="String" Name="Role_Define" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="ProBill_ReadAll_Result">
+          <Property Type="Int32" Name="Id_Bill" Nullable="false" />
+          <Property Type="Int32" Name="Id_Bou" Nullable="true" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Image" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="100" />
+          <Property Type="Decimal" Name="Price" Nullable="false" Precision="19" Scale="4" />
+          <Property Type="Int32" Name="Id_Cus" Nullable="true" />
+          <Property Type="Int32" Name="Volume" Nullable="true" />
+          <Property Type="DateTime" Name="Order_Date" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="Delivery_Date" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Cus_Note" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Bill_Status" Nullable="true" MaxLength="20" />
+        </ComplexType>
         <ComplexType Name="ProBill_ReadAllBillByBouquest_Result">
           <Property Type="Int32" Name="Id_Bill" Nullable="false" />
           <Property Type="Int32" Name="Id_Bou" Nullable="true" />
@@ -834,6 +869,15 @@
           <Property Type="DateTime" Name="Delivery_Date" Nullable="true" Precision="23" />
           <Property Type="String" Name="Cus_Note" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="Bill_Status" Nullable="true" MaxLength="20" />
+        </ComplexType>
+        <ComplexType Name="ProBouReadAll_Result">
+          <Property Type="Int32" Name="Id_Bou" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Image" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="2000" />
+          <Property Type="Decimal" Name="Price" Nullable="false" Precision="19" Scale="4" />
+          <Property Type="String" Name="Status" Nullable="true" MaxLength="20" />
+          <Property Type="Int32" Name="Id_Cus" Nullable="false" />
         </ComplexType>
         <ComplexType Name="ProCartDetails_Create_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
@@ -1037,7 +1081,44 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Pro_ReadShop" FunctionName="JavaFloristModel.Store.Pro_ReadShop">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="JavaFloristModel.Pro_ReadShop_Result">
+                <ScalarProperty Name="Id_Cus" ColumnName="Id_Cus" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Birth" ColumnName="Birth" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Id_Gender" ColumnName="Id_Gender" />
+                <ScalarProperty Name="Gender_Define" ColumnName="Gender_Define" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Id_Role" ColumnName="Id_Role" />
+                <ScalarProperty Name="Role_Define" ColumnName="Role_Define" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="ProBill_Create" FunctionName="JavaFloristModel.Store.ProBill_Create" />
+          <FunctionImportMapping FunctionImportName="ProBill_ReadAll" FunctionName="JavaFloristModel.Store.ProBill_ReadAll">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="JavaFloristModel.ProBill_ReadAll_Result">
+                <ScalarProperty Name="Id_Bill" ColumnName="Id_Bill" />
+                <ScalarProperty Name="Id_Bou" ColumnName="Id_Bou" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Id_Cus" ColumnName="Id_Cus" />
+                <ScalarProperty Name="Volume" ColumnName="Volume" />
+                <ScalarProperty Name="Order_Date" ColumnName="Order_Date" />
+                <ScalarProperty Name="Delivery_Date" ColumnName="Delivery_Date" />
+                <ScalarProperty Name="Cus_Note" ColumnName="Cus_Note" />
+                <ScalarProperty Name="Bill_Status" ColumnName="Bill_Status" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="ProBill_ReadAllBillByBouquest" FunctionName="JavaFloristModel.Store.ProBill_ReadAllBillByBouquest">
             <ResultMapping>
               <ComplexTypeMapping TypeName="JavaFloristModel.ProBill_ReadAllBillByBouquest_Result">
@@ -1079,6 +1160,19 @@
           <FunctionImportMapping FunctionImportName="ProBill_UpStt_Done" FunctionName="JavaFloristModel.Store.ProBill_UpStt_Done" />
           <FunctionImportMapping FunctionImportName="ProBill_UpStt_Loading" FunctionName="JavaFloristModel.Store.ProBill_UpStt_Loading" />
           <FunctionImportMapping FunctionImportName="ProBill_UpStt_Other" FunctionName="JavaFloristModel.Store.ProBill_UpStt_Other" />
+          <FunctionImportMapping FunctionImportName="ProBouReadAll" FunctionName="JavaFloristModel.Store.ProBouReadAll">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="JavaFloristModel.ProBouReadAll_Result">
+                <ScalarProperty Name="Id_Bou" ColumnName="Id_Bou" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Id_Cus" ColumnName="Id_Cus" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="ProCart_CreateGetId" FunctionName="JavaFloristModel.Store.ProCart_CreateGetId" />
           <FunctionImportMapping FunctionImportName="ProCart_Update" FunctionName="JavaFloristModel.Store.ProCart_Update" />
           <FunctionImportMapping FunctionImportName="ProCartDetails_Create" FunctionName="JavaFloristModel.Store.ProCartDetails_Create">

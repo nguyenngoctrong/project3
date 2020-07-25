@@ -1,0 +1,111 @@
+﻿@model IEnumerable<project3.Models.BouquetModel>
+
+@{
+    ViewBag.Title = "Bouquets";
+    Layout = "~/Views/Shared/_SideBar.cshtml";
+}
+
+<div class="container-fluid">
+    <h1 class="mt-4">Bouquets Management</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item">
+            <a href="@Url.Action("Index", null, new { area = string.Empty, controller = "Admin" }, Request.Url.Scheme)">
+                Dashboard
+            </a>
+        </li>
+        <li class="breadcrumb-item active">Page</li>
+        <li class="breadcrumb-item active">Finance</li>
+        <li class="breadcrumb-item active">Bouquets</li>
+    </ol>
+    <div class="card mb-4">
+        <div class="card-body">
+            <a>INSTRUCTIONS</a>
+            <a>***</a>
+        </div>
+    </div>
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-table mr-1"></i>
+            DataTable
+        </div>
+        <div class="container card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayName("Id")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Image")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Name")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Price")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Status")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Options")
+                            </th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>
+                                @Html.DisplayName("Id")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Image")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Name")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Price")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Status")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Options")
+                            </th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Id)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Image)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Price)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Status)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Details", "BouquetDetails", new { id = item.Id }) |
+                                    @Html.ActionLink("Edit", "BouquetEdit", new { id = item.Id }) |
+                                    @Html.ActionLink("Delete", "BouquetDelete", new { id = item.Id }) 
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+

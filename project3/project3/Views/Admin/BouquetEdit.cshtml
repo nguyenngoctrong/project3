@@ -1,0 +1,112 @@
+﻿@model Models.FrameWork.Bouquest
+
+@{
+    ViewBag.Title = "BouquetEdit";
+    Layout = "~/Views/Shared/_SideBar.cshtml";
+}
+
+<div class="container-fluid">
+    <h1 class="mt-4">Eidt Bouquet</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item">
+            <a href="@Url.Action("Index", null, new { area = string.Empty, controller = "Admin" }, Request.Url.Scheme)">
+                Dashboard
+            </a>
+        </li>
+        <li class="breadcrumb-item active">Page</li>
+        <li class="breadcrumb-item active">Finance</li>
+        <li class="breadcrumb-item active">Bouquets</li>
+    </ol>
+    <div class="card mb-4">
+        <div class="card-body">
+            INSTRUCTIONS
+            <hr />
+            <p>Can not change bouquet's owner!</p>
+            <p>***</p>
+        </div>
+    </div>
+
+    <div class="container-fluid card mb-4">
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <hr />
+            <div class="row card-body">
+                <div class="form-horizontal col-md-6">
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.Id_Bou)
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label" })
+                        <div class="col-md-12">
+                            @Html.Label(">>>image here<<<")
+                            @Html.EditorFor(model => model.Image, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label" })
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-horizontal col-md-6">
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label" })
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label " })
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label" })
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.Status, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Id_Cus, "Seller", htmlAttributes: new { @class = "control-label" })
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.Id_Cus, new { htmlAttributes = new { @class = "form-control", @readonly = "true" } })
+                            @Html.ActionLink("-details", "DetailsCustomer", new { id = Model.Id_Cus })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-12">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+            </div>
+        }
+    </div>
+    <div>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item">
+                <p>
+                    @Html.ActionLink("Back to List", "Bouquets")
+
+                </p>
+            </li>
+        </ol>
+    </div>
+</div>
