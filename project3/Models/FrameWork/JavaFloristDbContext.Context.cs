@@ -38,6 +38,11 @@ namespace Models.FrameWork
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
     
+        public virtual ObjectResult<Pro_ReadShop_Result> Pro_ReadShop()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Pro_ReadShop_Result>("Pro_ReadShop");
+        }
+    
         public virtual int ProBill_Create(Nullable<int> id_Bill, Nullable<int> id_Bou, string name, string image, string description, Nullable<decimal> price, Nullable<int> id_Cus, Nullable<int> volume, Nullable<System.DateTime> order_Date, Nullable<System.DateTime> delivery_Date, string cus_Note, string bill_status)
         {
             var id_BillParameter = id_Bill.HasValue ?
@@ -89,6 +94,11 @@ namespace Models.FrameWork
                 new ObjectParameter("bill_status", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ProBill_Create", id_BillParameter, id_BouParameter, nameParameter, imageParameter, descriptionParameter, priceParameter, id_CusParameter, volumeParameter, order_DateParameter, delivery_DateParameter, cus_NoteParameter, bill_statusParameter);
+        }
+    
+        public virtual ObjectResult<ProBill_ReadAll_Result> ProBill_ReadAll()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ProBill_ReadAll_Result>("ProBill_ReadAll");
         }
     
         public virtual ObjectResult<ProBill_ReadAllBillByBouquest_Result> ProBill_ReadAllBillByBouquest(Nullable<int> id_Bou)
@@ -156,6 +166,11 @@ namespace Models.FrameWork
                 new ObjectParameter("status", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ProBill_UpStt_Other", id_BillParameter, statusParameter);
+        }
+    
+        public virtual ObjectResult<ProBouReadAll_Result> ProBouReadAll()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ProBouReadAll_Result>("ProBouReadAll");
         }
     
         public virtual ObjectResult<Nullable<int>> ProCart_CreateGetId(Nullable<int> id_Cus)

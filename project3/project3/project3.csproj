@@ -240,6 +240,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
@@ -247,10 +248,15 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AdminCustomer.cs" />
+    <Compile Include="Models\BillModel.cs" />
+    <Compile Include="Models\BouquetModel.cs" />
+    <Compile Include="Models\EmailInfo.cs" />
     <Compile Include="Models\Password.cs" />
     <Compile Include="Models\Home.cs" />
     <Compile Include="Models\Profile.cs" />
     <Compile Include="Models\Register.cs" />
+    <Compile Include="Models\ResetPw.cs" />
     <Compile Include="MyRoleProvider\SiteRole.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -393,6 +399,25 @@
     <Content Include="Views\Profile\Index.cshtml" />
     <Content Include="Views\Purchase\Index.cshtml" />
     <Content Include="Views\Purchase\Detail.cshtml" />
+    <Content Include="Views\Admin\Bill.cshtml" />
+    <Content Include="Views\Admin\BillDetails.cshtml" />
+    <Content Include="Views\Admin\BillEdit.cshtml" />
+    <Content Include="Views\Admin\BouquetDelete.cshtml" />
+    <Content Include="Views\Admin\BouquetDetails.cshtml" />
+    <Content Include="Views\Admin\BouquetEdit.cshtml" />
+    <Content Include="Views\Admin\Bouquets.cshtml" />
+    <Content Include="Views\Admin\CreateCustomer.cshtml" />
+    <Content Include="Views\Admin\DeleteCustomer.cshtml" />
+    <Content Include="Views\Admin\DetailsCustomer.cshtml" />
+    <Content Include="Views\Admin\EditCustomer.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\ManageCustomer.cshtml" />
+    <Content Include="Views\Admin\SellerCreate.cshtml" />
+    <Content Include="Views\Admin\SellerDelete.cshtml" />
+    <Content Include="Views\Admin\SellerDetails.cshtml" />
+    <Content Include="Views\Admin\SellerEdit.cshtml" />
+    <Content Include="Views\Admin\SellerManagement.cshtml" />
+    <Content Include="Views\Shared\_SideBar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

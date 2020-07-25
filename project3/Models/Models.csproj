@@ -200,6 +200,12 @@
     <Compile Include="FrameWork\ProBill_ReadAllBillByCustomer_Result.cs">
       <DependentUpon>JavaFloristDbContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="FrameWork\ProBill_ReadAll_Result.cs">
+      <DependentUpon>JavaFloristDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FrameWork\ProBouReadAll_Result.cs">
+      <DependentUpon>JavaFloristDbContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="FrameWork\ProCartDetails_Create_Result.cs">
       <DependentUpon>JavaFloristDbContext.tt</DependentUpon>
     </Compile>
@@ -222,6 +228,9 @@
       <DependentUpon>JavaFloristDbContext.tt</DependentUpon>
     </Compile>
     <Compile Include="FrameWork\ProMes_Read_Result.cs">
+      <DependentUpon>JavaFloristDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FrameWork\Pro_ReadShop_Result.cs">
       <DependentUpon>JavaFloristDbContext.tt</DependentUpon>
     </Compile>
     <Compile Include="FrameWork\Role.cs">

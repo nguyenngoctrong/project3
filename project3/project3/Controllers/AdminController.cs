@@ -6,8 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Admination;
-using Admination.Models;
+using Models.FrameWork;
 
 namespace project3.Models
 {
@@ -35,7 +34,7 @@ namespace project3.Models
                     Email = item.Email,
                     FullName = item.FirstName + " " + item.LastName,
                     Birth = item.Birth,
-                    Gender = item.Gender_Define, Phone = item.Phone,
+                    Phone = item.Phone,
                     Address = item.Address 
                 });
             }
@@ -51,7 +50,7 @@ namespace project3.Models
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Customer customer = db.Customer.Find(id);
+            Customer customer = db.Customers.Find(id);
 
 
 
@@ -66,8 +65,8 @@ namespace project3.Models
         // GET: Admin/Create
         public ActionResult CreateCustomer()
         {
-            ViewBag.Id_Gender = new SelectList(db.Gender, "Id_Gender", "Gender_Define");
-            ViewBag.Id_Role = new SelectList(db.Role, "Id_Role", "Role_Define");
+            ViewBag.Id_Gender = new SelectList(db.Genders, "Id_Gender", "Gender_Define");
+            ViewBag.Id_Role = new SelectList(db.Roles, "Id_Role", "Role_Define");
             return View();
         }
 
@@ -80,13 +79,13 @@ namespace project3.Models
         {
             if (ModelState.IsValid)
             {
-                db.Customer.Add(customer);
+                db.Customers.Add(customer);
                 db.SaveChanges();
                 return RedirectToAction("ManageCustomer");
             }
 
-            ViewBag.Id_Gender = new SelectList(db.Gender, "Id_Gender", "Gender_Define", customer.Id_Gender);
-            ViewBag.Id_Role = new SelectList(db.Role, "Id_Role", "Role_Define", customer.Id_Role);
+            ViewBag.Id_Gender = new SelectList(db.Genders, "Id_Gender", "Gender_Define", customer.Id_Gender);
+            ViewBag.Id_Role = new SelectList(db.Roles, "Id_Role", "Role_Define", customer.Id_Role);
             return View(customer);
         }
 
@@ -97,13 +96,13 @@ namespace project3.Models
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Customer customer = db.Customer.Find(id);
+            Customer customer = db.Customers.Find(id);
             if (customer == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.Id_Gender = new SelectList(db.Gender, "Id_Gender", "Gender_Define", customer.Id_Gender);
-            ViewBag.Id_Role = new SelectList(db.Role, "Id_Role", "Role_Define", customer.Id_Role);
+            ViewBag.Id_Gender = new SelectList(db.Genders, "Id_Gender", "Gender_Define", customer.Id_Gender);
+            ViewBag.Id_Role = new SelectList(db.Roles, "Id_Role", "Role_Define", customer.Id_Role);
             return View(customer);
         }
 
@@ -120,8 +119,8 @@ namespace project3.Models
                 db.SaveChanges();
                 return RedirectToAction("ManageCustomer");
             }
-            ViewBag.Id_Gender = new SelectList(db.Gender, "Id_Gender", "Gender_Define", customer.Id_Gender);
-            ViewBag.Id_Role = new SelectList(db.Role, "Id_Role", "Role_Define", customer.Id_Role);
+            ViewBag.Id_Gender = new SelectList(db.Genders, "Id_Gender", "Gender_Define", customer.Id_Gender);
+            ViewBag.Id_Role = new SelectList(db.Roles, "Id_Role", "Role_Define", customer.Id_Role);
             return View(customer);
         }
 
@@ -132,7 +131,7 @@ namespace project3.Models
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Customer customer = db.Customer.Find(id);
+            Customer customer = db.Customers.Find(id);
             if (customer == null)
             {
                 return HttpNotFound();
@@ -184,7 +183,7 @@ namespace project3.Models
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Customer customer = db.Customer.Find(id);
+            Customer customer = db.Customers.Find(id);
             if (customer == null)
             {
                 return HttpNotFound();
@@ -194,8 +193,8 @@ namespace project3.Models
 
         public ActionResult SellerCreate()
         {
-            ViewBag.Id_Gender = new SelectList(db.Gender, "Id_Gender", "Gender_Define");
-            ViewBag.Id_Role = new SelectList(db.Role, "Id_Role", "Role_Define");
+            ViewBag.Id_Gender = new SelectList(db.Genders, "Id_Gender", "Gender_Define");
+            ViewBag.Id_Role = new SelectList(db.Roles, "Id_Role", "Role_Define");
             return View();
         }
 
@@ -205,13 +204,13 @@ namespace project3.Models
         {
             if (ModelState.IsValid)
             {
-                db.Customer.Add(customer);
+                db.Customers.Add(customer);
                 db.SaveChanges();
                 return RedirectToAction("SellerManagement");
             }
 
-            ViewBag.Id_Gender = new SelectList(db.Gender, "Id_Gender", "Gender_Define", customer.Id_Gender);
-            ViewBag.Id_Role = new SelectList(db.Role, "Id_Role", "Role_Define", customer.Id_Role);
+            ViewBag.Id_Gender = new SelectList(db.Genders, "Id_Gender", "Gender_Define", customer.Id_Gender);
+            ViewBag.Id_Role = new SelectList(db.Roles, "Id_Role", "Role_Define", customer.Id_Role);
             return View(customer);
         }
 
@@ -221,13 +220,13 @@ namespace project3.Models
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Customer customer = db.Customer.Find(id);
+            Customer customer = db.Customers.Find(id);
             if (customer == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.Id_Gender = new SelectList(db.Gender, "Id_Gender", "Gender_Define", customer.Id_Gender);
-            ViewBag.Id_Role = new SelectList(db.Role, "Id_Role", "Role_Define", customer.Id_Role);
+            ViewBag.Id_Gender = new SelectList(db.Genders, "Id_Gender", "Gender_Define", customer.Id_Gender);
+            ViewBag.Id_Role = new SelectList(db.Roles, "Id_Role", "Role_Define", customer.Id_Role);
             return View(customer);
         }
 
@@ -244,8 +243,8 @@ namespace project3.Models
                 db.SaveChanges();
                 return RedirectToAction("SellerManagement");
             }
-            ViewBag.Id_Gender = new SelectList(db.Gender, "Id_Gender", "Gender_Define", customer.Id_Gender);
-            ViewBag.Id_Role = new SelectList(db.Role, "Id_Role", "Role_Define", customer.Id_Role);
+            ViewBag.Id_Gender = new SelectList(db.Genders, "Id_Gender", "Gender_Define", customer.Id_Gender);
+            ViewBag.Id_Role = new SelectList(db.Roles, "Id_Role", "Role_Define", customer.Id_Role);
             return View(customer);
         }
 
@@ -255,7 +254,7 @@ namespace project3.Models
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Customer customer = db.Customer.Find(id);
+            Customer customer = db.Customers.Find(id);
             if (customer == null)
             {
                 return HttpNotFound();
@@ -307,7 +306,7 @@ namespace project3.Models
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Bill bill = db.Bill.Find(id);
+            Bill bill = db.Bills.Find(id);
             if (bill == null)
             {
                 return HttpNotFound();
@@ -321,7 +320,7 @@ namespace project3.Models
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Bill bill = db.Bill.Find(id);
+            Bill bill = db.Bills.Find(id);
             if (bill == null)
             {
                 return HttpNotFound();
@@ -379,7 +378,7 @@ namespace project3.Models
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Bouquest bouquest = db.Bouquest.Find(id);
+            Bouquest bouquest = db.Bouquests.Find(id);
             if (bouquest == null)
             {
                 return HttpNotFound();
@@ -394,7 +393,7 @@ namespace project3.Models
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Bouquest bouquest = db.Bouquest.Find(id);
+            Bouquest bouquest = db.Bouquests.Find(id);
             if (bouquest == null)
             {
                 return HttpNotFound();
@@ -427,7 +426,7 @@ namespace project3.Models
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Bouquest bouquest = db.Bouquest.Find(id);
+            Bouquest bouquest = db.Bouquests.Find(id);
             if (bouquest == null)
             {
                 return HttpNotFound();
@@ -440,8 +439,8 @@ namespace project3.Models
         [ValidateAntiForgeryToken]
         public ActionResult BouquetDeleteConfirmed(int id)
         {
-            Bouquest bouquest = db.Bouquest.Find(id);
-            db.Bouquest.Remove(bouquest);
+            Bouquest bouquest = db.Bouquests.Find(id);
+            db.Bouquests.Remove(bouquest);
             db.SaveChanges();
             return RedirectToAction("Bouquets");
         }
